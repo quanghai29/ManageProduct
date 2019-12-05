@@ -1,0 +1,24 @@
+{
+  "name": "doanquaysach",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quanghai29/DoAnQuanLyQuaySach.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/quanghai29/DoAnQuanLyQuaySach/issues"
+  },
+  "homepage": "https://github.com/quanghai29/DoAnQuanLyQuaySach#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^3.1.0"
+  }
+}
