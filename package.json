@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/quanghai29/DoAnQuanLyQuaySach.git"
+    "url": "git+https://github.com/quanghai29/ManageProduct.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/quanghai29/DoAnQuanLyQuaySach/issues"
+    "url": "https://github.com/quanghai29/ManageProduct/issues"
   },
-  "homepage": "https://github.com/quanghai29/DoAnQuanLyQuaySach#readme",
+  "homepage": "https://github.com/quanghai29/ManageProduct#readme",
   "dependencies": {
     "express": "^4.17.1",
     "express-handlebars": "^3.1.0"
