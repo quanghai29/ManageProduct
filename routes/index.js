@@ -1,4 +1,5 @@
 var express = require('express');
+var productModel= require('../models/product.model');
 var router = express.Router();
 
 /* GET home page. */
@@ -12,8 +13,11 @@ router.get('/accounts', function(req, res, next) {
 });
 
 /* GET products page. */
-router.get('/products', function(req, res, next) {
-  res.render('products');
+router.get('/products',async function(req, res, next) {
+  const listproduct = await productModel.all();
+  res.render('products',{
+    listproduct
+  });
 });
 
 /* GET add-product page. */
