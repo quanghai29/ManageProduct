@@ -75,6 +75,7 @@
                 Thông tin
               </a>
             </li>
+
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
@@ -89,13 +90,24 @@
                 <a class="dropdown-item" href="#">Customize</a>
               </div>
             </li>
-          </ul>
-          <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link d-block" href="login">
-                Long, <b>Đăng xuất</b>
+              <a class="nav-link" href="/user/signup">
+                <i class="fa fa-pencil-alt"></i>
+                Sign Up
               </a>
             </li>
+          </ul>
+          <form action="/user/logout" method="post" id="frmLogout"></form>
+          <ul class="navbar-nav">
+            {{#if isAuthenticated}}
+            <li class="nav-item">
+
+              <a class="nav-link d-block" href="javascript: $('#frmLogout').submit();">
+                {{authUser.username}}<b>, Đăng Xuất </b>
+              </a>
+            </li>
+            {{/if}}
+            
           </ul>
         </div>
       </div>

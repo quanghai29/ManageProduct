@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+    <style>
+        body {
+            background: linear-gradient(-135deg, #c850c0, #4158d0);
+        }
+    </style>
+</head>
+
+<body>
+    {{!-- form login --}}
+    <div class="container w-50 px-md-5 py-1 shadow-lg my-5 bg-white">
+        <form onsubmit="return validate();" method="POST" novalidate id="frmRegister" name="frmRegister">
+            <div class="text-center mt-5">
+                <h1 class="h1 font-weight-bold">Sign Up</h1>
+            </div>
+
+            <div class="mb-4">
+                <h1 class="h3 mb-3 font-weight-light">Thông tin bắt buộc</h1>
+            </div>
+            <div class="form-label-group mb-4">
+                <label for="inputUsername">User Name</label>
+                <input type="text" id="txtUsername" name="username" class="form-control" placeholder="haimtp"
+                    autofocus="true">
+            </div>
+            <div class="form-label-group">
+                <label for="inputPassword">Password</label>
+                <input type="text" id="txtPassword" name="raw_password" class="form-control">
+            </div>
+            <hr>
+            <div class="mb-4">
+                <h1 class="h3 my-3 font-weight-light">Thông tin chung</h1>
+            </div>
+            <div class="form-label-group mb-4">
+                <label for="inputName">Name</label>
+                <input type="text" id="txtName" name="ten" class="form-control" placeholder="Quang Hai"
+                    autofocus="true">
+            </div>
+            <div class="form-label-group mb-4">
+                <label for="inputEmail">Giới Tính</label>
+                <select class="form-control" name="value_GioiTinh">
+                    <option value="0">Nam</option>
+                    <option value="1">Nữ</option>
+                </select>
+            </div>
+
+            <div class="form-label-group mb-4">
+                <label for="inputEmail">Email address</label>
+                <input type="text" id="txtEmail" name="email" class="form-control" placeholder="QH@micro.com">
+            </div>
+            <div class="form-label-group mb-4">
+                <label for="inputEmail">Address</label>
+                <input type="text" id="txtAddress" name="diachi" class="form-control">
+            </div>
+            <div class="form-group mb-4">
+                <label for="DOB">Date of brith</label>
+                <input type="text" id="txtDOB" name="dob" class="form-control">
+            </div>
+            <button class="btn btn-lg btn-info mb-2" type="submit">Sign Up</button>
+        </form>
+        <div class="container text-center">
+            <a class href="/">
+                <button class="btn btn-lg btn-warning mb-2" type="submit"> 
+                    Home<i class="fa fa-home fa-10x"></i>
+                </button>
+            </a>
+        </div>   
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+    <script>
+        $('#txtDOB').datetimepicker({
+            // format: 'd/m/Y H:i'
+            format: 'd/m/Y',
+            timepicker: false,
+            mask: true,
+        });
+        function validate() {
+            return true;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>Login</title>
+    <style>
+        body {
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: top;
+            background-image: url(http://bit.ly/2gPLxZ4);
+            width: 100%;
+            height: 100%;
+            font-family: Arial, Helvetica;
+            letter-spacing: 0.02em;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .mt-5 {
+            margin-top: 7% !important;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <!--Login Form-->
+    <div class="container w-50 px-md-5 py-1 shadow-lg mt-5 mb-1 bg-white shadow rounded">
+        <form onsubmit="return validate();" method="POST" novalidate id="frmLogin" name="frmLogin">
+            <div class="text-center mt-5">
+                <h1 class="h1 font-weight-bold">Login</h1>
+            </div>
+            {{#if err_message}}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{err_message}}
+            </div>
+            {{/if}}
+
+            <div class="form-label-group mb-4">
+                <label for="inputUsername">User Name</label>
+                <input type="text" id="txtUsername" name="username" class="form-control" placeholder="haimtp"
+                    autofocus="true">
+            </div>
+            <div class="form-label-group mb-4">
+                <label for="inputPassword">Password</label>
+                <input type="text" id="txtPassword" name="password" class="form-control">
+            </div>
+            <button class="btn btn-lg btn-info mb-2" type="submit">Login</button> 
+        </form>
+        <div class="container text-center">
+        <a class href="/user/signup">
+            <button class="btn btn-lg btn-warning mb-2" type="submit"> 
+                Sign Up<i class="fa fa-home fa-10x"></i>
+            </button>
+        </a>
+        </div>         
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+
+
+<script>
+    function validate() {
+        return true;
+    }
+</script>
