@@ -1,17 +1,13 @@
 var express = require('express');
 const bcrypt = require('bcryptjs');
 const userModel = require('../models/user.model');
+const roleAdmin=require('../middlewares/auth.mdw');
 const moment = require('moment');
 const router = express.Router();
 
 
-
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
-
-router.get('/signup', async (req, res) => {
+//Sign up
+router.get('/signup',roleAdmin, async (req, res) => {
   res.render('signup',{
     layout:false
   });
@@ -41,6 +37,8 @@ router.post('/signup', async (req, res) => {
 
   res.redirect('/');
 });
+
+//Login
 router.get('/login', async (req, res) => {
   res.render('login',{
     layout:false
@@ -72,7 +70,18 @@ router.post('/login', async (req, res) => {
 router.post('/logout', (req, res) => {
   req.session.isAuthenticated = false;
   req.session.authUser = null;
-  //req.session.role=-1;
+  req.session.role=-1;
   res.redirect('/user/login');
 });
+
+router.get('/alert', async (req, res) => {
+  res.render('alert',{
+    layout:true
+  });
+});
+//Modified Prfile
+
+//code here
+
+//
 module.exports = router;

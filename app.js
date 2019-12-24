@@ -1,9 +1,11 @@
 var createError = require('http-errors');
 var express = require('express');
+const exphbs = require('express-handlebars');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const session = require('express-session');
+const hbs_sections = require('express-handlebars-sections');
 
 
 var app = express();
@@ -11,6 +13,15 @@ var app = express();
 // view engine setup
 app.use(express.static('public'));
 app.set('views', path.join(__dirname, 'views'));
+
+app.engine('hbs', exphbs({
+   defaultLayout: 'layout.hbs',
+   layoutsDir: 'views',
+    helpers: {
+    section: hbs_sections(),
+  }
+}));
+
 app.set('view engine', 'hbs');
 
 app.use(logger('dev'));
@@ -26,6 +37,7 @@ app.use(session({
   //     secure: true
   // }
 }))
+
 
 
 require('./middlewares/locals.mdw')(app);

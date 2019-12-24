@@ -4,42 +4,72 @@
             <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="tm-block-title d-inline-block">Add Product</h2>
+                        <h2 class="tm-block-title d-inline-block">Thêm sản phẩm</h2>
                     </div>
                 </div>
                 <div class="row tm-edit-product-row">
                     <div class="col-xl-6 col-lg-6 col-md-12">
-                        <form action="" class="tm-edit-product-form">
+                        <form action="/add-product" method = "POST" class="tm-edit-product-form">
                             <div class="form-group mb-3">
-                                <label for="name">Product Name
+                                <label for="id">Mã sản phẩm
                                 </label>
-                                <input id="name" name="name" type="text" class="form-control validate" required />
+                                <input id="id" name="id" type="text"
+                                    class="form-control validate" />
                             </div>
                             <div class="form-group mb-3">
-                                <label for="description">Description</label>
-                                <textarea class="form-control validate" rows="3" required></textarea>
+                                <label for="tensanpham">Tên sản phẩm
+                                </label>
+                                <input id="tensanpham" name="tensanpham" type="text"
+                                    class="form-control validate" />
                             </div>
                             <div class="form-group mb-3">
-                                <label for="category">Category</label>
+                                <label for="tentacgia">Tên tác giả
+                                </label>
+                                <input id="tentacgia" name="tentacgia" type="text" value="{{item.tentacgia}}"
+                                    class="form-control validate" />
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="nxb">Tên nhà xuất bản
+                                </label>
+                                <input id="nxb" name="nxb" type="text"
+                                    class="form-control validate" />
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="id_theloai">Thể loại
+                                </label>
+                                <input id="id_theloai" name="id_theloai" type="text"
+                                    class="form-control validate" />
+                            </div>
+
+                            <!-- <div class="form-group mb-3">
+                                <label for="category">Thể loại</label>
                                 <select class="custom-select tm-select-accounts" id="category">
-                                    <option selected>Select category</option>
-                                    <option value="1">New Arrival</option>
+                                    <option>Select category</option>
+                                    <option value="1" selected>New Arrival</option>
                                     <option value="2">Most Popular</option>
                                     <option value="3">Trending</option>
                                 </select>
-                            </div>
+                            </div> -->
                             <div class="row">
                                 <div class="form-group mb-3 col-xs-12 col-sm-6">
-                                    <label for="expire_date">Expire Date
+                                    <label for="dongia">Đơn giá
                                     </label>
-                                    <input id="expire_date" name="expire_date" type="text" class="form-control validate"
-                                        data-large-mode="true" />
+                                    <input id="dongia" name="dongia" type="number"
+                                        class="form-control validate" data-large-mode="true" />
                                 </div>
                                 <div class="form-group mb-3 col-xs-12 col-sm-6">
-                                    <label for="stock">Units In Stock
-                                    </label>
-                                    <input id="stock" name="stock" type="text" class="form-control validate" required />
+                                    
+                                        <label for="sl">Số lượng
+                                </label>
+                                <input id="sl" name="sl" type="number"
+                                    class="form-control validate" />
                                 </div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="img">Link ảnh
+                                    </label>
+                                    <input id="img" name="img" type="text"
+                                        class="form-control validate" />
                             </div>
 
                     </div>

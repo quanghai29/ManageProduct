@@ -1,0 +1,15 @@
+
+<div class="container h-100 bg-dark">
+  
+<div>
+{{#section 'js'}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+  <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+  <script>
+    Swal.fire({
+    icon: 'error',
+    title: 'Error Role',
+    text: 'Bạn không có quyền truy cập vào chức năng này',
+    })
+  </script>
+{{/section}}

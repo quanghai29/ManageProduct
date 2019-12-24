@@ -4,63 +4,83 @@
             <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="tm-block-title d-inline-block">Edit Product</h2>
+                        <h2 class="tm-block-title d-inline-block">Chỉnh sửa sản phẩm</h2>
                     </div>
                 </div>
                 <div class="row tm-edit-product-row">
                     <div class="col-xl-6 col-lg-6 col-md-12">
                         <form action="" method="post" class="tm-edit-product-form">
                             <div class="form-group mb-3">
-                                <label for="name">Product Name
+                                <label for="id">Mã sản phẩm
                                 </label>
-                                <input id="name" name="name" type="text" value="Lorem Ipsum Product"
-                                    class="form-control validate" />
+                                <input id="id" name="id" type="text" value="{{item.id}}"
+                                class="form-control validate" />
                             </div>
                             <div class="form-group mb-3">
-                                <label for="description">Description</label>
-                                <textarea class="form-control validate tm-small" rows="5"
-                                    required>Lorem ipsum dolor amet gentrify glossier locavore messenger bag chillwave hashtag irony migas wolf kale chips small batch kogi direct trade shaman.</textarea>
+                                <label for="tensanpham">Tên sản phẩm
+                                </label>
+                                <input id="tensanpham" name="tensanpham" type="text" value="{{item.tensanpham}}"
+                                class="form-control validate" />
                             </div>
                             <div class="form-group mb-3">
-                                <label for="category">Category</label>
+                                <label for="tentacgia">Tên tác giả
+                                </label>
+                                <input id="tentacgia" name="tentacgia" type="text" value="{{item.tentacgia}}"
+                                class="form-control validate" />
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="nxb">Tên nhà xuất bản
+                                </label>
+                                <input id="nxb" name="nxb" type="text" value="{{item.nxb}}"
+                                class="form-control validate" />
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="id_theloai">Thể loại
+                                </label>
+                                <input id="id_theloai" name="id_theloai" type="text" value="{{item.id_theloai}}"
+                                class="form-control validate" />
+                            </div>
+
+                            <!-- <div class="form-group mb-3">
+                                <label for="category">Thể loại</label>
                                 <select class="custom-select tm-select-accounts" id="category">
                                     <option>Select category</option>
                                     <option value="1" selected>New Arrival</option>
                                     <option value="2">Most Popular</option>
                                     <option value="3">Trending</option>
                                 </select>
-                            </div>
+                            </div> -->
                             <div class="row">
                                 <div class="form-group mb-3 col-xs-12 col-sm-6">
-                                    <label for="expire_date">Expire Date
+                                    <label for="dongia">Đơn giá
                                     </label>
-                                    <input id="expire_date" name="expire_date" type="text" value="22 Oct, 2020"
-                                        class="form-control validate" data-large-mode="true" />
+                                    <input id="dongia" name="dongia" type="number" value="{{item.dongia}}"
+                                    class="form-control validate" data-large-mode="true" />
                                 </div>
                                 <div class="form-group mb-3 col-xs-12 col-sm-6">
-                                    <label for="stock">Units In Stock
+                                    
+                                    <label for="sl">Số lượng
                                     </label>
-                                    <input id="stock" name="stock" type="text" value="19,765"
-                                        class="form-control validate" />
+                                    <input id="sl" name="sl" type="number" value="{{item.sl}}"
+                                    class="form-control validate" />
                                 </div>
                             </div>
+                            <div class="form-group mb-3">
+                                <label for="img">Link ảnh
+                                </label>
+                                <input id="img" name="img" type="text" value="{{item.img}}"
+                                class="form-control validate" />
+                            </div>
 
-                    </div>
-                    <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
-                        <div class="tm-product-img-edit mx-auto">
-                            <img src="img/product-image.jpg" alt="Product image" class="img-fluid d-block mx-auto">
-                            <i class="fas fa-cloud-upload-alt tm-upload-icon"
-                                onclick="document.getElementById('fileInput').click();"></i>
                         </div>
-                        <div class="custom-file mt-3 mb-3">
-                            <input id="fileInput" type="file" style="display:none;" />
-                            <input type="button" class="btn btn-primary btn-block mx-auto" value="CHANGE IMAGE NOW"
-                                onclick="document.getElementById('fileInput').click();" />
+                        <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
+                            <div class="tm-product-img-edit mx-auto">
+                                <img src="{{item.img}}" alt="Product image" class="img-fluid d-block mx-auto">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-12">
-                        <button type="submit" class="btn btn-primary btn-block text-uppercase">Update Now</button>
-                    </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary btn-block text-uppercase">Lưu</button>
+                        </div>
                     </form>
                 </div>
             </div>

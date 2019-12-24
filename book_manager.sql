@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: book_manager
 -- ------------------------------------------------------
--- Server version	8.0.18
+-- Server version	5.7.28-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -28,9 +28,7 @@ CREATE TABLE `ct_donhang` (
   `sl` int(11) DEFAULT NULL,
   `thanhtien` float DEFAULT NULL,
   PRIMARY KEY (`id_donhang`,`id_sanpham`),
-  KEY `FK_ct_donhang_sanpham_idx` (`id_sanpham`),
-  CONSTRAINT `FK_ct_donhang_donhang` FOREIGN KEY (`id_donhang`) REFERENCES `donhang` (`id`),
-  CONSTRAINT `FK_ct_donhang_sanpham` FOREIGN KEY (`id_sanpham`) REFERENCES `sanpham` (`id`)
+  CONSTRAINT `FK_ct_donhang_donhang` FOREIGN KEY (`id_donhang`) REFERENCES `donhang` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -40,7 +38,6 @@ CREATE TABLE `ct_donhang` (
 
 LOCK TABLES `ct_donhang` WRITE;
 /*!40000 ALTER TABLE `ct_donhang` DISABLE KEYS */;
-INSERT INTO `ct_donhang` VALUES (1,1,2,118000),(1,2,1,57000);
 /*!40000 ALTER TABLE `ct_donhang` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,7 +79,7 @@ DROP TABLE IF EXISTS `loai_member`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `loai_member` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `tenloai` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `tenloai` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -106,18 +103,21 @@ DROP TABLE IF EXISTS `members`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `members` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `matkhau` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `ten` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `username` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(5000) COLLATE utf8_unicode_ci NOT NULL,
+  `ten` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
   `loai` int(11) DEFAULT NULL,
   `ngaysinh` date DEFAULT NULL,
-  `diachi` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `diachi` varchar(200) CHARACTER SET utf8 DEFAULT NULL,
   `sdt` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
   `luong` float DEFAULT NULL,
   `email` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `gioitinh` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `username_UNIQUE` (`username`),
   KEY `FK_member_loaimember_idx` (`loai`),
   CONSTRAINT `FK_member_loaimember` FOREIGN KEY (`loai`) REFERENCES `loai_member` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,7 +126,7 @@ CREATE TABLE `members` (
 
 LOCK TABLES `members` WRITE;
 /*!40000 ALTER TABLE `members` DISABLE KEYS */;
-INSERT INTO `members` VALUES (1,'12345','Nguyễn Quang Hải',1,'1999-05-27','227 nguyễn văn cừ quận 5','0981937907',30000000,'lequanghai540@gmail.com'),(2,'12345','Nguyễn Văn Toàn',2,'1999-04-16','245 phan đình phùng tân bình','0132486412',15000000,'nguyenvantoan@gmail.com');
+INSERT INTO `members` VALUES (1,'mtp','12345','Nguyễn Quang Hải',1,'1999-05-27','227 nguyễn văn cừ quận 5','0981937907',30000000,'lequanghai540@gmail.com',NULL),(2,'333','12345','Nguyễn Văn Toàn',2,'1999-04-16','245 phan đình phùng tân bình','0132486412',15000000,'nguyenvantoan@gmail.com',NULL),(10,'trinh','$2a$10$pQv8KxsCz0iyJfmhA7sYOe4YWkmVKO6sNRMDb/UnPhAGLD4mQEPb2','LÊ QUANG HẢI',1,'2019-12-09','ktx khu B Đại Học Quốc Gia tp Hồ Chí Minh, linh trung, Thủ Đức',NULL,NULL,'lequanghai540@gmail.com','Nữ'),(11,'quanghaitt','$2a$10$DWwpvOIoAEamk8dvzXkWc.P0mYwa1dQq8Wyp8q.1Zy41yrHnXgVRG','LÊ QUANG HẢI',2,'2019-12-08','ktx khu B Đại Học Quốc Gia tp Hồ Chí Minh, linh trung, Thủ Đức',NULL,NULL,'lequanghai540@gmail.com','Nam');
 /*!40000 ALTER TABLE `members` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,10 +139,10 @@ DROP TABLE IF EXISTS `sanpham`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `sanpham` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `tensanpham` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `tensanpham` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
   `sl` int(11) DEFAULT NULL,
-  `tentacgia` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `nxb` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `tentacgia` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `nxb` varchar(200) CHARACTER SET utf8 DEFAULT NULL,
   `id_theloai` int(11) DEFAULT NULL,
   `dongia` float DEFAULT NULL,
   `img` longtext COLLATE utf8_unicode_ci,
@@ -158,7 +158,7 @@ CREATE TABLE `sanpham` (
 
 LOCK TABLES `sanpham` WRITE;
 /*!40000 ALTER TABLE `sanpham` DISABLE KEYS */;
-INSERT INTO `sanpham` VALUES (1,'Nhà giả kim',10,'Paulo Coelho','nhà xuất bản văn học',1,59000,NULL),(2,'Đắc nhân tâm',2,'Dale Carnegie','nhà xuất bản tổng hơp thành phố HCM',1,57000,NULL),(3,'Tuổi trẻ đáng giá bao nhiêu',50,'Rosie Nguyễn','nhà xuất bản hội nhà văn',1,58000,NULL),(4,'Chạm tói giấc mơ',100,'Sơn Tùng MTP','nhà xuất bản Hà Nội',1,60000,NULL),(5,'Tuổi trẻ chúng ta sẽ xanh mãi mãi',20,'Jinie Lynk','	Nhà Xuất Bản Văn Học',2,65000,NULL),(6,'Yêu đi đừng sợ',30,'Kim Oanh','Nhà Xuất Bản Phụ Nữ',2,48000,NULL),(7,'Mặn Béo Chua Nóng',5,'Samin Nosrat','	Nhà Xuất Bản Phụ Nữ',4,360000,NULL),(8,'Nấu Ăn Thông Minh - Tập2',55,' Nguyễn Quốc Thục Phương','	Nhà Xuất Bản Thế Giới',4,105000,NULL),(9,'90% Trẻ Thông Minh Nhờ ',32,'Urako Kanamori','Nhà Xuất Bản Kim Đồng',6,25000,NULL),(10,'Nuôi Con Không Phải Là Cuộc Chiến (Tái Bản)',70,'Mẹ Ong Bông','Nhà Xuất Bản Lao Động',6,69000,NULL);
+INSERT INTO `sanpham` VALUES (1,'Nhà giả kim',10,'Paulo Coelho','nhà xuất bản văn học',1,59000,'https://salt.tikicdn.com/cache/550x550/ts/product/66/5f/5a/312bac222584d52fea5e9d644369b254.jpg'),(2,'Đắc nhân tâm',2,'Dale Carnegie','nhà xuất bản tổng hơp thành phố HCM',1,57000,'https://bookmart.vn/wp-content/uploads/sach-dac-nhan-tam.jpg'),(3,'Tuổi trẻ đáng giá bao nhiêu',50,'Rosie Nguyễn','nhà xuất bản hội nhà văn',1,58000,'https://cdn0.fahasa.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/i/m/image_180164_2_287.jpg'),(4,'Chạm tới giấc mơ',100,'Sơn Tùng MTP','nhà xuất bản Hà Nội',1,60000,'https://salt.tikicdn.com/cache/550x550/media/catalog/product/p/h/photo_2017-09-29_14-07-40.u5567.d20170929.t140824.120862.jpg'),(5,'Tuổi trẻ chúng ta sẽ xanh mãi mãi',20,'Jinie Lynk','Nhà Xuất Bản Văn Học',2,65000,'https://salt.tikicdn.com/cache/550x550/ts/product/80/42/a3/f0c11d1d1328bc6a1bd05c93fae6be07.jpg'),(6,'Yêu đi đừng sợ',30,'Kim Oanh','Nhà Xuất Bản Phụ Nữ',2,48000,'https://salt.tikicdn.com/cache/550x550/ts/product/a3/9e/8a/f882cd9601f509c666eb4ce51f7dc830.jpg'),(7,'Mặn Béo Chua Nóng',5,'Samin Nosrat','Nhà Xuất Bản Phụ Nữ',4,360000,'https://salt.tikicdn.com/cache/w1200/ts/product/fc/55/35/f8cc09b40d5e6c04a0337dc5de9274e5.jpg'),(8,'Nấu Ăn Thông Minh - Tập 2',55,' Nguyễn Quốc Thục Phương','Nhà Xuất Bản Thế Giới',4,105000,'https://cf.shopee.vn/file/fde7f31072295c7bbda2ca4442df3dcc'),(9,'90% Trẻ Thông Minh Nhờ ',32,'Urako Kanamori','Nhà Xuất Bản Kim Đồng',6,25000,'https://salt.tikicdn.com/cache/550x550/ts/product/8c/da/cf/a05e93cfaf55e7917ef565717d581770.jpg'),(10,'Nuôi Con Không Phải Là Cuộc Chiến (Tái Bản)',70,'Mẹ Ong Bông','Nhà Xuất Bản Lao Động',6,69000,'https://salt.tikicdn.com/cache/550x550/ts/product/73/f8/56/2f60cf49537bc17bc3e18a67a172099f.jpg');
 /*!40000 ALTER TABLE `sanpham` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -171,7 +171,7 @@ DROP TABLE IF EXISTS `theloai`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `theloai` (
   `id_theloai` int(11) NOT NULL,
-  `ten` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `ten` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`id_theloai`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -195,4 +195,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-18 21:11:34
+-- Dump completed on 2019-12-24 17:11:52

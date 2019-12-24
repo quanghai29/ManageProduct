@@ -4,6 +4,8 @@
             <div class="tm-bg-primary-dark tm-block tm-block-products">
                 <div class="tm-product-table-container">
                     <table class="table table-hover tm-table-small tm-product-table">
+                        <h2 class="tm-block-title">Danh sách sản phẩm</h2>
+
                         <thead>
                             <tr>
                                 <th scope="col">&nbsp;</th>
@@ -11,7 +13,7 @@
                                 <th scope="col">SL</th>
                                 <th scope="col">Đơn giá</th>
                                 <th scope="col">Tác giả</th>
-                                <th scope="col">Nhà xuât bản</th>
+                                <th scope="col">Nhà xuất bản</th>
                                 <th scope="col">&nbsp;</th>
                                 <th scope="col">&nbsp;</th>
                             </tr>
@@ -21,15 +23,15 @@
                             {{#each this.listproduct}}
                             <tr>
                                 <td>
-                                    <img src="img/sp/{{id}}/Main.png" alt="imgage product" style="width:50px;height:5%">
+                                    <img src="{{img}}" alt="imgage product" style="width:50px;height:50px">
                                 </td>                                
-                                <td class="tm-product-name">{{tensanpham}}</td>
+                                <td class="tm-product-name"><a href="/edit-product?id={{id}}" style="color:white;">{{tensanpham}}</td>
                                 <td>{{sl}}</td>
                                 <td>{{dongia}}</td>
                                 <td>{{tentacgia}}</td>
                                 <td>{{nxb}}</td>
                                 <td>
-                                    <a href="#" class="tm-product-delete-link">
+                                    <a href="/delete-product?id={{id}}" class="tm-product-delete-link">
                                         <i class="far fa-trash-alt tm-product-delete-icon"></i>
                                     </a>
                                 </td>
@@ -40,12 +42,9 @@
                 </div>
                 <!-- table container -->
                 <a href="add-product" class="btn btn-primary btn-block text-uppercase mb-3">Thêm sản phẩm</a>
-                <button class="btn btn-primary btn-block text-uppercase">
-                    Xóa sản phẩm được chọn
-                </button>
             </div>
         </div>
-        {{!-- <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 tm-block-col">
+        <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 tm-block-col">
             <div class="tm-bg-primary-dark tm-block tm-block-product-categories">
                 <h2 class="tm-block-title">Danh mục sản phẩm</h2>
                 <div class="tm-product-table-container">
@@ -147,7 +146,7 @@
                     Thêm danh mục
                 </button>
             </div>
-        </div> --}}
+        </div> 
     </div>
 </div>
 <script src="js/jquery-3.3.1.min.js"></script>

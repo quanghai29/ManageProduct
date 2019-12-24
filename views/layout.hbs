@@ -2,12 +2,11 @@
 <html>
 
 <head>
-  <title>admin</title>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>Add Product - Dashboard HTML Template</title>
+  <title>{{title}}</title>
+  <link rel='stylesheet' href='/css/style.css' />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700" />
   <!-- https://fonts.google.com/specimen/Roboto -->
   <link rel="stylesheet" href="css/fontawesome.min.css" />
@@ -21,6 +20,7 @@
 	Product Admin CSS Template
 	https://templatemo.com/tm-524-product-admin
 	-->
+  {{{_sections.css}}}
 </head>
 
 <body>
@@ -28,7 +28,6 @@
     <nav class="navbar navbar-expand-xl">
       <div class="container h-100">
         <a class="navbar-brand" href="/">
-          <h1 class="tm-site-title mb-0">Quản lí sản phẩm</h1>
         </a>
         <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse"
           data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -41,7 +40,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="fas fa-tachometer-alt"></i>
-                Trang chủ
+                Thống kê
                 <span class="sr-only">(current)</span>
               </a>
             </li>
@@ -65,14 +64,14 @@
             <li class="nav-item">
               <a class="nav-link" href="products">
                 <i class="fas fa-shopping-cart"></i>
-                Sẩn phẩm
+                Sản phẩm
               </a>
             </li>
 
             <li class="nav-item">
               <a class="nav-link" href="accounts">
                 <i class="far fa-user"></i>
-                Thông tin
+                Tài khoản
               </a>
             </li>
 
@@ -125,6 +124,8 @@
       </p>
     </div>
   </footer>
+  <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.js"></script> 
+  {{{_sections.js}}}
 </body>
 
 </html>
