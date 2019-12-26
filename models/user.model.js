@@ -10,12 +10,24 @@ module.exports = {
     
         return rows[0];
       },
+    allName:() => {return db.load('select username, ten, email, sdt, password from members');},
     // getPro: id => db.loadOnePro(`select * from sanpham where ProID = ${id}`),
     // del: id => db.delete(`delete from sanpham where ProID = ${id}`),
-    // patch: entity => {
-    //     const condition = { ProID: entity.ProID };
-    //     delete entity.ProID;
-    //     console.log(condition, entity);
-    //     return db.patch('sanpham',entity,condition);
-    // }
+    patch: entity => {
+        const condition = { username: entity.username };
+        if(entity.password==entity.password2)
+        {
+          if(entity.password == "")
+            delete entity.password;
+          delete entity.username;
+          delete entity.password2;
+          console.log(condition, entity);
+          db.patch('members',entity,condition);
+          
+        }
+        else{
+          console.log("update user failed!");
+          
+        }
+    }
 };
