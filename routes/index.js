@@ -56,6 +56,19 @@ router.get('/delete-product', function(req, res, next) {
   res.redirect('products');
 });
 
+/* GET search-product page. */
+router.get('/search-product', async function(req, res, next) {
+  let key = req.query.search;
+  let temp = '%'+req.query.search+'%';
+  const listproduct = await productModel.search(temp);
+  res.render('search', {
+    title: 'Tìm kiếm sản phẩm', 
+    listproduct,
+    key
+  });
+});
+
+
 /* GET day page. */
 router.get('/day', function(req, res, next) {
   res.render('day');
