@@ -10,5 +10,6 @@ module.exports = {
         delete entity.id;
         console.log(condition, entity);
         return db.patch('sanpham',entity,condition);
-    }
+    },
+    search: key => db.search(`select * from sanpham where tensanpham like '${key}'`)
 };

@@ -17,5 +17,6 @@ module.exports={
     add:(tableName,entity)=>mysql_query(`insert into ${tableName} set ?`, entity),
     loadOnePro:sql=>mysql_query(sql),
     delete:sql=>mysql_query(sql),
-    patch:(tableName,entity,condition)=>mysql_query(`update ${tableName} set ? where ?`,[entity,condition])
+    patch:(tableName,entity,condition)=>mysql_query(`update ${tableName} set ? where ?`,[entity,condition]),
+    search:sql => mysql_query(sql)
 };
