@@ -1,5 +1,6 @@
 var express = require('express');
 var productModel= require('../models/product.model');
+var categoryModel= require('../models/category.model');
 var router = express.Router();
 
 /* GET home page. */
@@ -17,10 +18,16 @@ router.get('/accounts', function(req, res, next) {
 
 /* GET products page. */
 router.get('/products', async function(req, res, next) {
-  const listproduct = await productModel.all();
+  const [listproduct, listcate] = await Promise.all([
+      productModel.all(),
+      categoryModel.all()
+    ]) 
+  //console.log(listproduct);
+  console.log(listcate);
   res.render('products',{
     title: 'Sản phẩm',
-    listproduct
+    listproduct,
+    listcate
   });
 });
 
@@ -66,6 +73,24 @@ router.get('/search-product', async function(req, res, next) {
     listproduct,
     key
   });
+});
+
+/* POST add-category. */
+router.post('/add-category', async function(req, res, next) {
+  const dataCate = await categoryModel.add(req.body);
+  res.redirect('products');
+});
+
+/* POST edit-category page. */
+router.post('/edit-category', async function(req, res, next) {
+  const dataCate = await categoryModel.patch(req.body);
+  res.redirect('products');
+});
+
+/* GET delete-category page. */
+router.get('/delete-category', function(req, res, next) {
+  categoryModel.del(req.query.id);
+  res.redirect('products');
 });
 
 

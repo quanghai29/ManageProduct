@@ -18,3 +18,7 @@ a {
 .tm-block-products {
     min-height: 660px!important;
 }
+
+.tm-product-table-container.table-category {
+    max-height: 350px;
+}
