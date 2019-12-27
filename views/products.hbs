@@ -12,20 +12,22 @@
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 tm-block-col">
             <div class="tm-bg-primary-dark tm-block tm-block-products">
                 <h2 class="tm-block-title">Danh sách sản phẩm</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Ảnh</th>
+                            <th scope="col">Tên sản phẩm</th>
+                            <th scope="col">SL</th>
+                            <th scope="col">Đơn giá</th>
+                            <th scope="col">Tác giả</th>
+                            <th scope="col">Nhà xuất bản</th>
+                            <th scope="col">Xóa</th>
+                        </tr>
+                    </thead>
+                </table>
                 <div class="tm-product-table-container">
-                    <table class="table table-hover tm-table-small tm-product-table">
+                    <table class="table table-hover tm-table-small tm-product-table table-striped">
 
-                        <thead>
-                            <tr>
-                                <th scope="col">Ảnh</th>
-                                <th scope="col">Tên sản phẩm</th>
-                                <th scope="col">SL</th>
-                                <th scope="col">Đơn giá</th>
-                                <th scope="col">Tác giả</th>
-                                <th scope="col">Nhà xuất bản</th>
-                                <th scope="col">Xóa</th>
-                            </tr>
-                        </thead>
                         <tbody>
                             {{!-- Lấy dữ liệu bỏ vảo view --}}
                             {{#each this.listproduct}}
@@ -55,16 +57,18 @@
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 tm-block-col">
             <div class="tm-bg-primary-dark tm-block tm-block-product-categories">
                 <h2 class="tm-block-title">Danh sách thể loại</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Mã thể loại</th>
+                            <th scope="col">Tên thể loại</th>
+                            <th scope="col">Chỉnh sửa</th>
+                            <th scope="col">Xóa</th>
+                        </tr>
+                    </thead>
+                </table>
                 <div class="tm-product-table-container table-category">
-                    <table class="table tm-table-small tm-product-table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Mã thể loại</th>
-                                <th scope="col">Tên thể loại</th>
-                                <th scope="col">Chỉnh sửa</th>
-                                <th scope="col">Xóa</th>
-                            </tr>
-                        </thead>
+                    <table class="table tm-table-small tm-product-table table-striped">
                         <tbody>
                             {{#each this.listcate}}
                             <tr>
