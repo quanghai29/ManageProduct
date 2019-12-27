@@ -1,7 +1,8 @@
 var express = require('express');
-var productModel= require('../models/product.model');
-var categoryModel= require('../models/category.model');
+var productModel = require('../models/product.model');
+var categoryModel = require('../models/category.model');
 const userModel = require('../models/user.model');
+const productController = require('../controllers/productController');
 var router = express.Router();
 
 /* GET home page. */
@@ -27,81 +28,34 @@ router.post('/accounts', async  function(req, res, next){
 });
 
 /* GET products page. */
-router.get('/products', async function(req, res, next) {
-  const [listproduct, listcate] = await Promise.all([
-      productModel.all(),
-      categoryModel.all()
-    ]) 
-  //console.log(listproduct);
-  console.log(listcate);
-  res.render('products',{
-    title: 'Sản phẩm',
-    listproduct,
-    listcate
-  });
-});
+router.get('/products', productController.showProduct);
 
 /* GET add-product page. */
-router.get('/add-product', function(req, res, next) {
-  res.render('add-product', {title : 'Thêm sản phẩm'});
-});
+router.get('/add-product', productController.getAdd);
 
 /* POST add-product page. */
-router.post('/add-product', async function(req, res, next) {
-  const dataProduct = await productModel.add(req.body);
-  res.redirect('products');
-});
+router.post('/add-product', productController.postAdd);
 
 /* GET edit-product page. */
-router.get('/edit-product', async function(req, res, next) {
-  //console.log(req.query.id);
-  const dataProduct = await productModel.getPro(req.query.id);
-  //console.log(dataProduct[0]);
-  res.render('edit-product', {title : 'Chỉnh sửa sản phẩm', item: dataProduct[0]});
-  
-});
+router.get('/edit-product', productController.getEditPro);
 
 /* POST edit-product page. */
-router.post('/edit-product', async function(req, res, next) {
-  const dataProduct = await productModel.patch(req.body);
-  res.redirect('products');
-});
+router.post('/edit-product', productController.postEditPro);
 
 /* GET delete-product page. */
-router.get('/delete-product', function(req, res, next) {
-  productModel.del(req.query.id);
-  res.redirect('products');
-});
+router.get('/delete-product', productController.delPro);
 
 /* GET search-product page. */
-router.get('/search-product', async function(req, res, next) {
-  let key = req.query.search;
-  let temp = '%'+req.query.search+'%';
-  const listproduct = await productModel.search(temp);
-  res.render('search', {
-    title: 'Tìm kiếm sản phẩm', 
-    listproduct,
-    key
-  });
-});
+router.get('/search-product', productController.search);
 
 /* POST add-category. */
-router.post('/add-category', async function(req, res, next) {
-  const dataCate = await categoryModel.add(req.body);
-  res.redirect('products');
-});
+router.post('/add-category', productController.addCate);
 
 /* POST edit-category page. */
-router.post('/edit-category', async function(req, res, next) {
-  const dataCate = await categoryModel.patch(req.body);
-  res.redirect('products');
-});
+router.post('/edit-category', productController.editCate);
 
 /* GET delete-category page. */
-router.get('/delete-category', function(req, res, next) {
-  categoryModel.del(req.query.id);
-  res.redirect('products');
-});
+router.get('/delete-category', productController.delCate);
 
 
 /* GET day page. */
