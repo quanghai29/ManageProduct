@@ -1,7 +1,20 @@
 var productModel = require('../models/product.model');
 var categoryModel = require('../models/category.model');
 
-const handlebars= require('hbs');
+const handlebars= require('handlebars');
+
+handlebars.registerHelper("cate_select",(selectedCateID, cate_list)=>{
+  let html = "";
+  cate_list.forEach(function(item) { 
+    if(item.id_theloai == selectedCateID)
+    {
+      html = html + '<option selected value="'+item.id_theloai+'">'+ item.ten + '</option>';
+    }
+    else{
+      html = html + '<option value="'+item.id_theloai+'">'+item.ten+'</option>';
+    } });
+    return new handlebars.SafeString(html);
+});
 
 module.exports.showProduct = async (req, res, next) => {
   const [listproduct, listcate] = await Promise.all([
@@ -17,8 +30,9 @@ module.exports.showProduct = async (req, res, next) => {
   });
 }
 
-module.exports.getAdd = (req, res, next) => {
-  res.render('add-product', {title : 'Thêm sản phẩm'});
+module.exports.getAdd = async (req, res, next) => {
+  const listCate = await categoryModel.all();
+  res.render('add-product', {title : 'Thêm sản phẩm', listCate});
 }
 
 module.exports.postAdd = async (req, res, next) => {
@@ -28,9 +42,13 @@ module.exports.postAdd = async (req, res, next) => {
 
 module.exports.getEditPro = async (req, res, next) => {
   //console.log(req.query.id);
-  const dataProduct = await productModel.getPro(req.query.id);
-  //console.log(dataProduct[0]);
-  res.render('edit-product', {title : 'Chỉnh sửa sản phẩm', item: dataProduct[0]});  
+  const [dataProduct, listcate] = await Promise.all([
+    productModel.getPro(req.query.id),
+    categoryModel.all()
+    ]) 
+  console.log(dataProduct[0]);
+  console.log(listcate);
+  res.render('edit-product', {title : 'Chỉnh sửa sản phẩm', item: dataProduct[0], listcate});  
 }
 
 module.exports.postEditPro = async (req, res, next) => {

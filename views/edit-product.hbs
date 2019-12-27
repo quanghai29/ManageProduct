@@ -37,8 +37,8 @@
                             <div class="form-group mb-3">
                                 <label for="id_theloai">Thể loại
                                 </label>
-                                <input id="id_theloai" name="id_theloai" type="text" value="{{item.id_theloai}}"
-                                class="form-control validate" />
+                                <!-- <input id="id_theloai" name="id_theloai" type="text" value="{{item.id_theloai}}" class="form-control validate" /> -->
+                                <select name="id_theloai" class="custom-select tm-select-accounts" id="id_theloai">{{cate_select item.id_theloai listcate}}</select> 
                             </div>
 
                             <!-- <div class="form-group mb-3">
