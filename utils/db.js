@@ -11,7 +11,7 @@ pool.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
     console.log('The solution is: ', results[0].solution);
 });
 
-//Câu truy vấn 
+//Câu truy vấn
 module.exports={
     load: sql => mysql_query(sql),
     add:(tableName,entity)=>mysql_query(`insert into ${tableName} set ?`, entity),

@@ -1,6 +1,7 @@
 var express = require('express');
 var productModel= require('../models/product.model');
 var categoryModel= require('../models/category.model');
+const userModel = require('../models/user.model');
 var router = express.Router();
 
 /* GET home page. */
@@ -12,8 +13,17 @@ router.get('/alert', function(req, res, next) {
   res.render('alert', {title : 'alert error'});
 });
 /* GET account page. */
-router.get('/accounts', function(req, res, next) {
-  res.render('accounts', {title : 'Tài khoản'});
+router.get('/accounts',async function(req, res, next) {
+  const users = await userModel.allName();
+  const json = JSON.stringify(users);
+  
+  res.render('accounts', {title : 'Tài khoản', users: users, json: json});
+});
+
+router.post('/accounts', async  function(req, res, next){
+  userInfo = req.body;
+  await userModel.patch(userInfo);
+  res.redirect('/accounts');
 });
 
 /* GET products page. */
