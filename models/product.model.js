@@ -11,5 +11,12 @@ module.exports = {
         console.log(condition, entity);
         return db.patch('sanpham', entity, condition);
     },
-    search: key => db.search(`select * from sanpham where tensanpham like '${key}'`)
+    search: key => db.search(`select * from sanpham where tensanpham like '${key}'`),
+    storage: () => db.load(`select tensanpham, sl from sanpham order by sl desc limit 6`),
+    sumLimit: () => db.load(`select sum(tong.sl) as sl
+    from
+    (SELECT tensanpham, sl
+    FROM book_manager.sanpham
+    order by sl desc limit 6) as tong`),
+    sum: () => db.load(`select sum(sl) as sl from sanpham`)
 };
