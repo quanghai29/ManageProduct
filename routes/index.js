@@ -68,23 +68,7 @@ router.get('/week', function(req, res, next) {
 });
 
 /* GET month page. */
-router.get('/month',async function(req, res, next) {
-
-  const data =await orderModel.revenue();
-  var datas={};
-  datas.labels = [];  
-  datas.values = []; 
-  for ( i of data)
-  {
-    datas.labels.push(i.thang+ '/' + i.nam);
-    datas.values.push(i.doanhthu);
-  }
-  const json = JSON.stringify(datas);
-
-  console.log(json);
-  
-  res.render('month', {title : 'Báo cáo theo tháng',json});
-});
+router.get('/month',orderController.revenueMonth);
 
 /* GET quarter page. */
 router.get('/quarter', function(req, res, next) {

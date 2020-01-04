@@ -104,3 +104,18 @@ module.exports.showChart = async function(req, res, next) {
         
         res.render('index', {title : 'Thống kê',json});
       }
+module.exports.revenueMonth = async function(req, res, next) {
+
+  const data =await orderModel.revenue();
+  var datas={};
+  datas.labels = [];  
+  datas.values = []; 
+  for ( i of data)
+  {
+    datas.labels.push(i.thang+ '/' + i.nam);
+    datas.values.push(i.doanhthu);
+  }
+  const json = JSON.stringify(datas);
+  
+  res.render('month', {title : 'Báo cáo theo tháng',json});
+}
