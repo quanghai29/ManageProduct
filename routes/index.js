@@ -3,6 +3,7 @@ var productModel = require('../models/product.model');
 var categoryModel = require('../models/category.model');
 const userModel = require('../models/user.model');
 const productController = require('../controllers/productController');
+const cartController = require('../controllers/cartController');
 const orderController = require('../controllers/orderController');
 var router = express.Router();
 
@@ -28,6 +29,14 @@ router.post('/accounts', async  function(req, res, next){
 
 /* GET products page. */
 router.get('/products', productController.showProduct);
+
+router.get('/cart', cartController.showCart);
+router.get('/add-cart', cartController.getAdd);
+router.post('/add-cart', cartController.postAdd);
+/* GET search-product page. */
+router.get('/search-cart', cartController.search);
+/* GET delete-cart page. */
+router.get('/delete-cart', cartController.delCart);
 
 /* GET add-product page. */
 router.get('/add-product', productController.getAdd);

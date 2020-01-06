@@ -36,6 +36,7 @@ module.exports.getAdd = async (req, res, next) => {
 }
 
 module.exports.postAdd = async (req, res, next) => {
+  console.log(req.body);
   const dataProduct = await productModel.add(req.body);
   res.redirect('products');
 }
