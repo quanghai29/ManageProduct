@@ -12,22 +12,20 @@
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 tm-block-col">
             <div class="tm-bg-primary-dark tm-block tm-block-products">
                 <h2 class="tm-block-title">Danh sách sản phẩm</h2>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">Ảnh&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                            <th scope="col">Tên sản phẩm&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                            <th scope="col">SL</th>
-                            <th scope="col">Giá</th>
-                            <th scope="col">Tác giả&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                            <th scope="col">Nhà xuất bản&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                            <th scope="col">Xóa</th>
-                        </tr>
-                    </thead>
-                </table>
                 <div class="tm-product-table-container">
                     <table class="table table-hover tm-table-small tm-product-table table-striped">
-
+                        <thead>
+                            <tr>
+                                <th scope="col">Ảnh</th>
+                                <th scope="col">Tên sản phẩm</th>
+                                <th scope="col">Mã</th>
+                                <th scope="col">SL</th>
+                                <th scope="col">Giá</th>
+                                <th scope="col">Tác giả</th>
+                                <th scope="col">Nhà xuất bản</th>
+                                <th scope="col">Xóa</th>
+                            </tr>
+                        </thead>
                         <tbody>
                             {{!-- Lấy dữ liệu bỏ vảo view --}}
                             {{#each this.listproduct}}
@@ -36,6 +34,7 @@
                                     <img src="{{img}}" alt="imgage product" style="width:50px;height:50px">
                                 </td>                                
                                 <td class="tm-product-name"><a href="/edit-product?id={{id}}" style="color:white;">{{tensanpham}}</a></td>
+                                <td>{{id}}</td>
                                 <td>{{sl}}</td>
                                 <td>{{dongia}}</td>
                                 <td>{{tentacgia}}</td>

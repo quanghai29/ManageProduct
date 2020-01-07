@@ -131,8 +131,6 @@ module.exports.postAddOrder = async (req, res, next) => {
 
 module.exports.delOrder = async(req, res, next) => {
   orderModel.del(req.query.id);
-  listorder = await orderModel.all();
-  listdetailorder = await detailModel.all();
 
   const order = await detailModel.getDetailOrder(req.query.id);
   detailModel.del(req.query.id);
@@ -147,6 +145,9 @@ module.exports.delOrder = async(req, res, next) => {
     en.sl = old + item.sl;
     await productModel.patch(en);
   }
+
+  listorder = await orderModel.all();
+  listdetailorder = await detailModel.all();
 
   res.render('list-order',{
     title: 'Danh sách đơn hàng',
@@ -190,9 +191,11 @@ module.exports.editOrder = async(req, res, next) => {
 module.exports.cartInfo = async(req, res, next) => {
   await cartModel.clear();
   const listorder = await orderModel.all();
+  listdetailorder = await detailModel.all();
   res.render('list-order',{
     title:'Danh sách đơn hàng', 
-    listorder
+    listorder,
+    listdetailorder
   });
 }
 

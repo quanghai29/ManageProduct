@@ -1,7 +1,7 @@
 var express = require('express');
 const bcrypt = require('bcryptjs');
 const userModel = require('../models/user.model');
-const roleAdmin=require('../middlewares/auth.mdw');
+const roleAdmin=require('../middlewares/authAdmin.mdw');
 const moment = require('moment');
 const router = express.Router();
 
@@ -11,11 +11,10 @@ router.get('/signup',roleAdmin, async (req, res) => {
   res.render('signup',{
     layout:false
   });
-  
 });
 
 
-router.post('/signup', async (req, res) => {
+router.post('/signup',roleAdmin, async (req, res) => {
   const N = 10;
   var gioitinh='Nam';
   const hash = bcrypt.hashSync(req.body.raw_password, N);
@@ -67,6 +66,7 @@ router.post('/login', async (req, res) => {
   res.redirect(url);
 })
 
+
 router.post('/logout', (req, res) => {
   req.session.isAuthenticated = false;
   req.session.authUser = null;
@@ -74,11 +74,7 @@ router.post('/logout', (req, res) => {
   res.redirect('/user/login');
 });
 
-router.get('/alert', async (req, res) => {
-  res.render('alert',{
-    layout:true
-  });
-});
+
 //Modified Prfile
 
 //code here
