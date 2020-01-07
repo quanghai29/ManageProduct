@@ -11,8 +11,9 @@
             </div>
         </div>
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 tm-block-col">
+            <form action="/add-order" method = "POST" class="tm-edit-cart-form">
             <div class="tm-bg-primary-dark tm-block tm-block-products">
-                <h2 class="tm-block-title">Danh sách Giỏ Hàng</h2>
+                <h2 class="tm-block-title">Giỏ Hàng</h2>
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -45,11 +46,13 @@
                     </thead>
                 </table>
                 <p class="text-right text-white">Thành Tiền: {{this.thanhtien}} VNĐ</p>
-                <a href="add-cart" class="btn btn-primary btn-block text-uppercase mb-3">Thêm  Sản Phẩm Vào Giỏ Hàng</a>
+                <a href="add-cart" class="btn btn-primary btn-block text-uppercase mb-3">Thêm Sản Phẩm Vào Đơn Hàng</a>
+                <button type="submit" class="btn btn-primary btn-block text-uppercase mb-3">hoàn tất đơn Hàng</button>
                 
                 <!-- table container -->
                 
             </div>
+            </form>
         </div>
         
 <script src="js/jquery-3.3.1.min.js"></script>

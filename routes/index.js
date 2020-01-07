@@ -33,6 +33,7 @@ router.get('/products', productController.showProduct);
 router.get('/cart', cartController.showCart);
 router.get('/add-cart', cartController.getAdd);
 router.post('/add-cart', cartController.postAdd);
+router.post('/add-order', cartController.postAddOrder);
 /* GET search-product page. */
 router.get('/search-cart', cartController.search);
 /* GET delete-cart page. */

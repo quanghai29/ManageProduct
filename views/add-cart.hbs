@@ -11,13 +11,10 @@
                     <div class="col-xl-6 col-lg-6 col-md-12">
                         <form action="/add-cart" method = "POST" class="tm-edit-cart-form">
                             <div class="form-group mb-6">
-                                <label for="id_theloai">Chọn Sách
+                                <label for="id_product">ISBN
                                 </label>
-                                <select name="id_product" class="custom-select tm-select-accounts" id="id_product">
-                                    {{#each listProduct}}
-                                    <option value="{{id}}">{{tensanpham}}</option>
-                                    {{/each}}
-                                </select> 
+                                <input id="id_product" name="id_product" type="number"
+                                    class="form-control validate" />
                             </div>
                             <div class="form-group mb-6">
                                     
@@ -30,8 +27,8 @@
                         
 
                         </div>
-                        <div class="col-7">
-                            <button type="submit" class="btn btn-primary btn-block text-uppercase">Thêm Vào Giỏ Hàng</button>
+                        <div class="col-7 m-auto">
+                            <button type="submit" class="btn btn-primary btn-block text-uppercase">Thêm Vào đơn Hàng</button>
                         </div>
                     </form>
                 </div>

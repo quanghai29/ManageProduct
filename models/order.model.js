@@ -10,6 +10,9 @@ module.exports = {
         console.log(condition, entity);
         return db.patch('donhang', entity, condition);
     },
+
+    idnow: () => db.load(`SELECT max(id) as id FROM donhang`),
+
     revenue: date => {
         console.log(date);
         
