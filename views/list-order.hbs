@@ -1,6 +1,6 @@
 <div class="container mt-5">
     <div class="row tm-content-row">
-    <div class="row tm-content-row">
+    <div class="row tm-content-row m-auto">
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 tm-block-col">
             <div class="tm-bg-primary-dark tm-block tm-block-search">
                 <h2 class="tm-block-title">Tìm kiếm</h2>
@@ -25,7 +25,7 @@
                         </tr>
                         {{#each this.listorder}}
                             <tr>                             
-                                <td scope="col">{{id}}</td>
+                                <td scope="col" class="tm-order"><a href="/edit-order?id={{id}}" style="color:white;">{{id}}</a></td>
                                 <td scope="col">{{ngaylap}}</td>
                                 <td scope="col">{{tongtien}}</td>
                                 <td scope="col">{{thue}}</td>

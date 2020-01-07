@@ -39,6 +39,8 @@ router.get('/list-order', function(req, res, next) {
   res.render('list-order');
 });
 
+router.get('/edit-order', cartController.editOrder);
+router.get('/cart-info', cartController.cartInfo);
 router.get('/delete-order', cartController.delOrder);
 
 /* GET search-product page. */

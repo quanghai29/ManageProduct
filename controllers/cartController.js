@@ -6,19 +6,6 @@ var detailModel = require('../models/order_detail.model');
 
 const handlebars= require('handlebars');
 
-// handlebars.registerHelper("cate_select",(selectedCateID, cate_list)=>{
-//   let html = "";
-//   cate_list.forEach(function(item) { 
-//     if(item.id_theloai == selectedCateID)
-//     {
-//       html = html + '<option selected value="'+item.id_theloai+'">'+ item.ten + '</option>';
-//     }
-//     else{
-//       html = html + '<option value="'+item.id_theloai+'">'+item.ten+'</option>';
-//     } });
-//     return new handlebars.SafeString(html);
-// });
-
 module.exports.showCart = async (req, res, next) => {
   const [listproduct, listcate] = await Promise.all([
     cartModel.all(),
@@ -98,8 +85,9 @@ module.exports.postAddOrder = async (req, res, next) => {
 
   req.body['tongtien'] = thanhtien;
   req.body['thue'] = thanhtien*0.1;
-  const dataOrder = orderModel.add(req.body);
-
+  const dataOrder = await orderModel.add(req.body);
+  console.log(dataOrder);
+  
   const idnow = await orderModel.idnow();
   let id = 0;
   idnow.forEach(function(entry){
@@ -112,9 +100,10 @@ module.exports.postAddOrder = async (req, res, next) => {
     arr[i] = new Object();
     arr[i].id_donhang = id;
     arr[i].id_sanpham = item['id'];
+    console.log(id);
     arr[i].sl = item['sl'];
     arr[i].thanhtien = item['tongtien'];
-    detailModel.add(arr[i]);
+    await detailModel.add(arr[i]);
     const oldsl = await productModel.getPro(arr[i].id_sanpham);
     let old = 0;
     oldsl.forEach(function(entry){
@@ -123,13 +112,13 @@ module.exports.postAddOrder = async (req, res, next) => {
     var en = new Object();
     en.id = arr[i].id_sanpham;
     en.sl = old - arr[i].sl;
-    productModel.patch(en);
+    await productModel.patch(en);
     i++;
   };
   
   
 
-  cartModel.clear();
+  await cartModel.clear();
   listorder = await orderModel.all();
   listdetailorder = await detailModel.all();
 
@@ -156,7 +145,7 @@ module.exports.delOrder = async(req, res, next) => {
     var en = new Object();
     en.id = item.id_sanpham;
     en.sl = old + item.sl;
-    productModel.patch(en);
+    await productModel.patch(en);
   }
 
   res.render('list-order',{
@@ -165,3 +154,45 @@ module.exports.delOrder = async(req, res, next) => {
     listdetailorder
   });
 }
+
+module.exports.editOrder = async(req, res, next) => {
+  const order = await detailModel.getDetailOrder(req.query.id);
+  console.log(order);
+  var arr = new Object();
+  
+  let i = 0;
+  cartModel.clear();
+  for(item of order){
+    arr.id_seller = 1;
+    arr.id_product = item.id_sanpham;
+    arr.sl = item.sl;
+    console.log(arr);
+    await cartModel.add(arr);
+    i++;
+  };
+
+  const [listproduct, listcate] = await Promise.all([
+    cartModel.all(),
+    categoryModel.all()
+    ]) 
+    let thanhtien = 0;
+    listproduct.forEach(function(entry) {
+      thanhtien+= entry['tongtien'];
+});
+  res.render('cart-info',{
+    title: 'Sản phẩm',
+    listproduct,
+    listcate,
+    thanhtien
+  });
+}
+
+module.exports.cartInfo = async(req, res, next) => {
+  await cartModel.clear();
+  const listorder = await orderModel.all();
+  res.render('list-order',{
+    title:'Danh sách đơn hàng', 
+    listorder
+  });
+}
+
