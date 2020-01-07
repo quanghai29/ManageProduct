@@ -3,13 +3,16 @@ var productModel = require('../models/product.model');
 var categoryModel = require('../models/category.model');
 const userModel = require('../models/user.model');
 const productController = require('../controllers/productController');
-const orderModel = require('../models/order.model');
-
-const detailModel = require('../models/order_detail.model');
+const cartController = require('../controllers/cartController');
+const orderController = require('../controllers/orderController');
+const orderModel= require('../models/order.model');
+const detailModel =require('../models/order_detail.model');
+const authRole =require('../middlewares/auth.mdw');
+const roleAdmin = require('../middlewares/authAdmin.mdw');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/',async function(req, res, next) {
+router.get('/',authRole, async function(req, res, next) {
   const data1 = await orderModel.revenue();
   var datas={};
   datas.revenue = {};  
@@ -106,15 +109,22 @@ router.get('/',async function(req, res, next) {
     datas.storage.values.push(gtsl);
    // console.log(gtsl);
 //---
-
-  const json = JSON.stringify(datas);
   
-  res.render('index', {title : 'Thống kê',json});
+  const json = JSON.stringify(datas);
+
+  //danh sách member
+  const member= await userModel.getUserName();
+  
+  res.render('index', {
+    title : 'Thống kê',
+    member,
+    json
+  });
 });
 
-router.get('/alert', function(req, res, next) {
-  res.render('alert', {title : 'alert error'});
-});
+router.get('/',orderController.showChart);
+
+
 /* GET account page. */
 router.get('/accounts',async function(req, res, next) {
   const users = await userModel.allName();
@@ -131,6 +141,22 @@ router.post('/accounts', async  function(req, res, next){
 
 /* GET products page. */
 router.get('/products', productController.showProduct);
+
+router.get('/cart', cartController.showCart);
+router.get('/add-cart', cartController.getAdd);
+router.post('/add-cart', cartController.postAdd);
+
+router.post('/list-order', cartController.postAddOrder);
+router.get('/list-order', function(req, res, next) {
+  res.render('list-order');
+});
+
+router.get('/delete-order', cartController.delOrder);
+
+/* GET search-product page. */
+router.get('/search-cart', cartController.search);
+/* GET delete-cart page. */
+router.get('/delete-cart', cartController.delCart);
 
 /* GET add-product page. */
 router.get('/add-product', productController.getAdd);
@@ -161,42 +187,32 @@ router.get('/delete-category', productController.delCate);
 
 
 /* GET day page. */
-router.get('/day', function(req, res, next) {
+router.get('/day',roleAdmin, function(req, res, next) {
   res.render('day');
 });
 
 /* GET week page. */
-router.get('/week', function(req, res, next) {
+router.get('/week',roleAdmin, function(req, res, next) {
   res.render('week', {title : 'Báo cáo theo ngày'});
 });
 
 /* GET month page. */
-router.get('/month',async function(req, res, next) {
-
-  const data =await orderModel.revenue();
-  var datas={};
-  datas.labels = [];  
-  datas.values = []; 
-  for ( i of data)
-  {
-    datas.labels.push(i.thang+ '/' + i.nam);
-    datas.values.push(i.doanhthu);
-  }
-  const json = JSON.stringify(datas);
-
-  console.log(json);
-  
-  res.render('month', {title : 'Báo cáo theo tháng',json});
-});
+router.get('/month', roleAdmin,orderController.revenueMonth);
 
 /* GET quarter page. */
-router.get('/quarter', function(req, res, next) {
+router.get('/quarter',roleAdmin, function(req, res, next) {
   res.render('quarter', {title : 'Báo cáo theo quý'});
 });
 
 /* GET year page. */
-router.get('/year', function(req, res, next) {
+router.get('/year',roleAdmin, function(req, res, next) {
   res.render('year', {title : 'Báo cáo theo năm'});
+});
+
+router.get('/alert', async (req, res) => {
+  res.render('alert',{
+    title: 'Alert'
+  });
 });
 
 module.exports = router;

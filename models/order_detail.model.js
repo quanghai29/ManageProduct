@@ -3,7 +3,8 @@ const db = require('../utils/db');
 module.exports = {
     all: id => db.load(`select * from ct_donhang`),
     add: entity => db.add('ct_donhang', entity),
-    del: id => db.delete(`delete from ct_donhang where id = ${id}`),
+    del: id => db.delete(`delete from ct_donhang where id_donhang = ${id}`),
+    getDetailOrder: id => db.load(`select * from ct_donhang where id_donhang = ${id}`),
     patch: entity => {
         const condition = { id_donhang: entity.id_donhang, id_sanpham: entity.id_sanpham };
         delete entity.id;

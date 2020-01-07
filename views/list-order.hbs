@@ -1,0 +1,61 @@
+<div class="container mt-5">
+    <div class="row tm-content-row">
+    <div class="row tm-content-row">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 tm-block-col">
+            <div class="tm-bg-primary-dark tm-block tm-block-search">
+                <h2 class="tm-block-title">Tìm kiếm</h2>
+                <form action="">
+                    <input class = "form-control validate" type="text" name="search" placeholder="Nhập từ khóa cần tìm">
+                    <button type="submit" class="btn btn-primary btn-search"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 tm-block-col">
+            <div class="tm-bg-primary-dark tm-block tm-block-products">
+                <h2 class="tm-block-title">Danh sách đơn hàng</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID Đơn hàng</th>
+                            <th scope="col">Ngày lập</th>
+                            <th scope="col">Tổng tiền</th>
+                            <th scope="col">Thuế</th>
+                            <th scope="col">Seller</th>
+                            <th scope="col">Xóa</th>
+                        </tr>
+                        {{#each this.listorder}}
+                            <tr>                             
+                                <td scope="col">{{id}}</td>
+                                <td scope="col">{{ngaylap}}</td>
+                                <td scope="col">{{tongtien}}</td>
+                                <td scope="col">{{thue}}</td>
+                                <td scope="col">{{id_seller}}</td>
+
+                                <td scope="col">
+                                    
+                                    <a href="/delete-order?id={{id}}" class="tm-product-delete-link">
+                                        <i class="far fa-trash-alt tm-product-delete-icon"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            
+                        {{/each}}
+                    </thead>
+                </table>
+                <a href="cart" class="btn btn-primary btn-block text-uppercase mb-3">Thêm đơn hàng mới</a>
+                <!-- table container -->
+                
+            </div>
+        </div>
+        
+<script src="js/jquery-3.3.1.min.js"></script>
+<!-- https://jquery.com/download/ -->
+<script src="js/bootstrap.min.js"></script>
+<!-- https://getbootstrap.com/ -->
+<script>
+    $(function () {
+        $(".tm-order").on("click", function () {
+            window.location.href = "edit-order";
+        });
+    });
+</script>

@@ -1,0 +1,68 @@
+<div class="container mt-5">
+    <div class="row tm-content-row">
+    <div class="row tm-content-row">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 tm-block-col">
+            <div class="tm-bg-primary-dark tm-block tm-block-search">
+                <h2 class="tm-block-title">Tìm kiếm</h2>
+                <form action="/search-cart">
+                    <input class = "form-control validate" type="text" name="search" placeholder="Nhập từ khóa cần tìm">
+                    <button type="submit" class="btn btn-primary btn-search"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 tm-block-col">
+            <form action="/list-order" method = "POST" class="tm-edit-cart-form">
+            <div class="tm-bg-primary-dark tm-block tm-block-products">
+                <h2 class="tm-block-title">Giỏ Hàng</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Ảnh</th>
+                            <th scope="col">Mã Sách</th>
+                            <th scope="col">Tên Sách</th>
+                            <th scope="col">SL</th>
+                            <th scope="col">Tổng Tiền</th>
+                            <th scope="col">Xóa</th>
+                        </tr>
+                        {{#each this.listproduct}}
+                            <tr>
+                                <td scope="col">
+                                    <img src="{{img}}" alt="imgage product" style="width:50px;height:50px">
+                                </td>                                
+                                
+                                <td scope="col">{{id}}</td>
+                                <td scope="col" class="tm-product-name"><a href="/edit-product?id={{id}}" style="color:white;">{{tensanpham}}</a></tdscope="col">
+                                <td scope="col">{{sl}}</td>
+                                <td scope="col">{{tongtien}}</td>
+            
+                                <td scope="col">
+                                    
+                                    <a href="/delete-cart?id={{id_cart}}" class="tm-product-delete-link">
+                                        <i class="far fa-trash-alt tm-product-delete-icon"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {{/each}}
+                    </thead>
+                </table>
+                <p class="text-right text-white">Thành Tiền: {{this.thanhtien}} VNĐ</p>
+                <a href="add-cart" class="btn btn-primary btn-block text-uppercase mb-3">Thêm Sản Phẩm Vào Đơn Hàng</a>
+                <button type="submit" class="btn btn-primary btn-block text-uppercase mb-3">hoàn tất đơn Hàng</button>
+                
+                <!-- table container -->
+                
+            </div>
+            </form>
+        </div>
+        
+<script src="js/jquery-3.3.1.min.js"></script>
+<!-- https://jquery.com/download/ -->
+<script src="js/bootstrap.min.js"></script>
+<!-- https://getbootstrap.com/ -->
+<script>
+    $(function () {
+        $(".tm-product-name").on("click", function () {
+            window.location.href = "edit-product";
+        });
+    });
+</script>

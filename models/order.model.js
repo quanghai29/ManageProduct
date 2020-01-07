@@ -1,5 +1,6 @@
 const db = require('../utils/db');
 
+
 module.exports = {
     all: id => db.load(`select * from donhang`),
     add: entity => db.add('donhang', entity),
@@ -10,6 +11,9 @@ module.exports = {
         console.log(condition, entity);
         return db.patch('donhang', entity, condition);
     },
+
+    idnow: () => db.load(`SELECT max(id) as id FROM donhang`),
+
     revenue: date => {
         console.log(date);
         

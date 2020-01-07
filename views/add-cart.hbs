@@ -1,0 +1,43 @@
+<div class="container tm-mt-big tm-mb-big">
+    <div class="row">
+        <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
+            <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="tm-block-title d-inline-block">Thêm Giỏ Hàng</h2>
+                    </div>
+                </div>
+                <div class="row tm-edit-product-row">
+                    <div class="col-xl-6 col-lg-6 col-md-12">
+                        <form action="/add-cart" method = "POST" class="tm-edit-cart-form">
+                            <div class="form-group mb-6">
+                                <label for="id_product">ISBN
+                                </label>
+                                <input id="id_product" name="id_product" type="number"
+                                    class="form-control validate" />
+                            </div>
+                            <div class="form-group mb-6">
+                                    
+                                    <label for="sl">Số lượng
+                                    </label>
+                                    <input id="sl" name="sl" type="number"
+                                    class="form-control validate" />
+                                </div>
+                            </div>
+                        
+
+                        </div>
+                        <div class="col-7 m-auto">
+                            <button type="submit" class="btn btn-primary btn-block text-uppercase">Thêm Vào đơn Hàng</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $("#expire_date").datepicker();
+    });
+</script>

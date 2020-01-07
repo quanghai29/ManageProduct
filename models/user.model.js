@@ -11,6 +11,7 @@ module.exports = {
         return rows[0];
       },
     allName:() => {return db.load('select username, ten, email, sdt, password from members');},
+    getUserName:()=> db.load(`select username,ten,tenloai  from members as m inner join loai_member as l on m.loai=l.id `),
     // getPro: id => db.loadOnePro(`select * from sanpham where ProID = ${id}`),
     // del: id => db.delete(`delete from sanpham where ProID = ${id}`),
     patch: entity => {
