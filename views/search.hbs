@@ -1,0 +1,170 @@
+<div class="container mt-5">
+    <div class="row tm-content-row">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 tm-block-col">
+            <div class="tm-bg-primary-dark tm-block tm-block-search">
+                <h2 class="tm-block-title">Tìm kiếm sản phẩm</h2>
+                <form action="/search-product">
+                    <input class = "form-control validate" type="text" name="search" placeholder="Nhập từ khóa cần tìm">
+                    <button type="submit" class="btn btn-primary btn-search"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 tm-block-col">
+            <div class="tm-bg-primary-dark tm-block tm-block-products">
+                <h2 class="tm-block-title">Danh sách sản phẩm có từ khóa "<i>{{{key}}}</i> "</h2>
+                <div class="tm-product-table-container">
+                    <table class="table table-hover tm-table-small tm-product-table">
+
+                        <thead>
+                            <tr>
+                                <th scope="col">Ảnh</th>
+                                <th scope="col">Tên sản phẩm</th>
+                                <th scope="col">SL</th>
+                                <th scope="col">Đơn giá</th>
+                                <th scope="col">Tác giả</th>
+                                <th scope="col">Nhà xuất bản</th>
+                                <th scope="col">Xóa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{!-- Lấy dữ liệu bỏ vảo view --}}
+                            {{#each this.listproduct}}
+                            <tr>
+                                <td>
+                                    <img src="{{img}}" alt="imgage product" style="width:50px;height:50px">
+                                </td>                                
+                                <td class="tm-product-name"><a href="/edit-product?id={{id}}" style="color:white;">{{tensanpham}}</a></td>
+                                <td>{{sl}}</td>
+                                <td>{{dongia}}</td>
+                                <td>{{tentacgia}}</td>
+                                <td>{{nxb}}</td>
+                                <td>
+                                    <a href="/delete-product?id={{id}}" class="tm-product-delete-link">
+                                        <i class="far fa-trash-alt tm-product-delete-icon"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- table container -->
+                <a href="add-product" class="btn btn-primary btn-block text-uppercase mb-3">Thêm sản phẩm</a>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 tm-block-col">
+            <div class="tm-bg-primary-dark tm-block tm-block-product-categories">
+                <h2 class="tm-block-title">Danh mục sản phẩm</h2>
+                <div class="tm-product-table-container">
+                    <table class="table tm-table-small tm-product-table">
+                        <tbody>
+                            <tr>
+                                <td class="tm-product-name">Product Category 1</td>
+                                <td class="text-center">
+                                    <a href="#" class="tm-product-delete-link">
+                                        <i class="far fa-trash-alt tm-product-delete-icon"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tm-product-name">Product Category 2</td>
+                                <td class="text-center">
+                                    <a href="#" class="tm-product-delete-link">
+                                        <i class="far fa-trash-alt tm-product-delete-icon"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tm-product-name">Product Category 3</td>
+                                <td class="text-center">
+                                    <a href="#" class="tm-product-delete-link">
+                                        <i class="far fa-trash-alt tm-product-delete-icon"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tm-product-name">Product Category 4</td>
+                                <td class="text-center">
+                                    <a href="#" class="tm-product-delete-link">
+                                        <i class="far fa-trash-alt tm-product-delete-icon"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tm-product-name">Product Category 5</td>
+                                <td class="text-center">
+                                    <a href="#" class="tm-product-delete-link">
+                                        <i class="far fa-trash-alt tm-product-delete-icon"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tm-product-name">Product Category 6</td>
+                                <td class="text-center">
+                                    <a href="#" class="tm-product-delete-link">
+                                        <i class="far fa-trash-alt tm-product-delete-icon"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tm-product-name">Product Category 7</td>
+                                <td class="text-center">
+                                    <a href="#" class="tm-product-delete-link">
+                                        <i class="far fa-trash-alt tm-product-delete-icon"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tm-product-name">Product Category 8</td>
+                                <td class="text-center">
+                                    <a href="#" class="tm-product-delete-link">
+                                        <i class="far fa-trash-alt tm-product-delete-icon"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tm-product-name">Product Category 9</td>
+                                <td class="text-center">
+                                    <a href="#" class="tm-product-delete-link">
+                                        <i class="far fa-trash-alt tm-product-delete-icon"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tm-product-name">Product Category 10</td>
+                                <td class="text-center">
+                                    <a href="#" class="tm-product-delete-link">
+                                        <i class="far fa-trash-alt tm-product-delete-icon"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tm-product-name">Product Category 11</td>
+                                <td class="text-center">
+                                    <a href="#" class="tm-product-delete-link">
+                                        <i class="far fa-trash-alt tm-product-delete-icon"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- table container -->
+                <button class="btn btn-primary btn-block text-uppercase mb-3">
+                    Thêm danh mục
+                </button>
+            </div>
+        </div> 
+    </div>
+</div>
+<script src="js/jquery-3.3.1.min.js"></script>
+<!-- https://jquery.com/download/ -->
+<script src="js/bootstrap.min.js"></script>
+<!-- https://getbootstrap.com/ -->
+<script>
+    $(function () {
+        $(".tm-product-name").on("click", function () {
+            window.location.href = "edit-product";
+        });
+    });
+</script>

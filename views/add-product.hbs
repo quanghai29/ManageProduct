@@ -4,22 +4,22 @@
             <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="tm-block-title d-inline-block">Chỉnh sửa sản phẩm</h2>
+                        <h2 class="tm-block-title d-inline-block">Thêm sản phẩm</h2>
                     </div>
                 </div>
                 <div class="row tm-edit-product-row">
                     <div class="col-xl-6 col-lg-6 col-md-12">
-                        <form action="" method="post" class="tm-edit-product-form">
+                        <form action="/add-product" method = "POST" class="tm-edit-product-form">
                             <div class="form-group mb-3">
                                 <label for="id">Mã sản phẩm
                                 </label>
-                                <input id="id" name="id" type="text" value="{{item.id}}"
+                                <input id="id" name="id" type="text"
                                 class="form-control validate" />
                             </div>
                             <div class="form-group mb-3">
                                 <label for="tensanpham">Tên sản phẩm
                                 </label>
-                                <input id="tensanpham" name="tensanpham" type="text" value="{{item.tensanpham}}"
+                                <input id="tensanpham" name="tensanpham" type="text"
                                 class="form-control validate" />
                             </div>
                             <div class="form-group mb-3">
@@ -31,14 +31,17 @@
                             <div class="form-group mb-3">
                                 <label for="nxb">Tên nhà xuất bản
                                 </label>
-                                <input id="nxb" name="nxb" type="text" value="{{item.nxb}}"
+                                <input id="nxb" name="nxb" type="text"
                                 class="form-control validate" />
                             </div>
                             <div class="form-group mb-3">
                                 <label for="id_theloai">Thể loại
                                 </label>
-                                <!-- <input id="id_theloai" name="id_theloai" type="text" value="{{item.id_theloai}}" class="form-control validate" /> -->
-                                <select name="id_theloai" class="custom-select tm-select-accounts" id="id_theloai">{{cate_select item.id_theloai listcate}}</select> 
+                                <select name="id_theloai" class="custom-select tm-select-accounts" id="id_theloai">
+                                    {{#each listCate}}
+                                    <option value="{{this.id_theloai}}">{{this.ten}}</option>
+                                    {{/each}}
+                                </select> 
                             </div>
 
                             <!-- <div class="form-group mb-3">
@@ -54,52 +57,47 @@
                                 <div class="form-group mb-3 col-xs-12 col-sm-6">
                                     <label for="dongia">Đơn giá
                                     </label>
-                                    <input id="dongia" name="dongia" type="number" value="{{item.dongia}}"
+                                    <input id="dongia" name="dongia" type="number"
                                     class="form-control validate" data-large-mode="true" />
                                 </div>
                                 <div class="form-group mb-3 col-xs-12 col-sm-6">
-
+                                    
                                     <label for="sl">Số lượng
                                     </label>
-                                    <input id="sl" name="sl" type="number" value="{{item.sl}}"
+                                    <input id="sl" name="sl" type="number"
                                     class="form-control validate" />
                                 </div>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="img">Link ảnh
                                 </label>
-                                <input id="img" name="img" type="text" value="{{item.img}}"
+                                <input id="img" name="img" type="text"
                                 class="form-control validate" />
                             </div>
-                            <button type="submit" class="btn btn-primary btn-block text-uppercase">Lưu</button>
-                            <br>
-                        </form>
-                    </div>
-                    <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
-                        <div class="tm-product-img-edit mx-auto">
-                            <img src="{{item.img}}" alt="Product image" class="img-fluid d-block mx-auto">
+
                         </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <a href="/delete-product?id={{item.id}}" style="color:white;">  
-                            <button type="submit" class="btn btn-primary btn-block text-uppercase">Xóa sản phẩm</button>
-                        </a>
-                    </div>
+                        <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
+                            <div class="tm-product-img-dummy mx-auto">
+                                <i class="fas fa-cloud-upload-alt tm-upload-icon"
+                                onclick="document.getElementById('fileInput').click();"></i>
+                            </div>
+                            <div class="custom-file mt-3 mb-3">
+                                <input id="fileInput" type="file" style="display:none;" />
+                                <input type="button" class="btn btn-primary btn-block mx-auto" value="UPLOAD PRODUCT IMAGE"
+                                onclick="document.getElementById('fileInput').click();" />
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary btn-block text-uppercase">Thêm sản phẩm mới</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script src="js/jquery-3.3.1.min.js"></script>
-<!-- https://jquery.com/download/ -->
-<script src="jquery-ui-datepicker/jquery-ui.min.js"></script>
-<!-- https://jqueryui.com/download/ -->
-<script src="js/bootstrap.min.js"></script>
-<!-- https://getbootstrap.com/ -->
 <script>
     $(function () {
-        $("#expire_date").datepicker({
-            defaultDate: "10/22/2020"
-        });
+        $("#expire_date").datepicker();
     });
 </script>

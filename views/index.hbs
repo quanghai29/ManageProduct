@@ -293,9 +293,14 @@
     barChart, pieChart;
     // DOM is ready
     $(function () {
-        drawLineChart(); // Line Chart
-        drawBarChart(); // Bar Chart
-        drawPieChart(); // Pie Chart
+        
+        const json = '{{json}}';
+        const data = json.replace(/&quot;/g,'"');
+        
+        const values = JSON.parse(data);
+        drawLineChart(values.revenue_count); // Line Chart
+        drawBarChart(values.revenue); // Bar Chart
+        drawPieChart(values.storage); // Pie Chart
 
         $(window).resize(function () {
             updateLineChart();

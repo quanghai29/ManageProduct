@@ -6,3 +6,19 @@ body {
 a {
   color: #00B7FF;
 }
+
+.tm-block-search{
+   min-height: 150px!important;
+}
+
+.btn-search {
+    float: right;
+    margin-top: -5%;
+}
+.tm-block-products {
+    min-height: 715px!important;
+}
+
+.tm-product-table-container.table-category {
+    max-height: 305px;
+}

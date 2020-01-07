@@ -1,23 +1,33 @@
 <div class="container mt-5">
     <div class="row tm-content-row">
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 tm-block-col">
+            <div class="tm-bg-primary-dark tm-block tm-block-search">
+                <h2 class="tm-block-title">Tìm kiếm sản phẩm</h2>
+                <form action="/search-product">
+                    <input class = "form-control validate" type="text" name="search" placeholder="Nhập từ khóa cần tìm">
+                    <button type="submit" class="btn btn-primary btn-search"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 tm-block-col">
             <div class="tm-bg-primary-dark tm-block tm-block-products">
+                <h2 class="tm-block-title">Danh sách sản phẩm</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Ảnh&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                            <th scope="col">Tên sản phẩm&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                            <th scope="col">SL</th>
+                            <th scope="col">Giá</th>
+                            <th scope="col">Tác giả&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                            <th scope="col">Nhà xuất bản&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                            <th scope="col">Xóa</th>
+                        </tr>
+                    </thead>
+                </table>
                 <div class="tm-product-table-container">
-                    <table class="table table-hover tm-table-small tm-product-table">
-                        <h2 class="tm-block-title">Danh sách sản phẩm</h2>
+                    <table class="table table-hover tm-table-small tm-product-table table-striped">
 
-                        <thead>
-                            <tr>
-                                <th scope="col">&nbsp;</th>
-                                <th scope="col">Tên sản phẩm</th>
-                                <th scope="col">SL</th>
-                                <th scope="col">Đơn giá</th>
-                                <th scope="col">Tác giả</th>
-                                <th scope="col">Nhà xuất bản</th>
-                                <th scope="col">&nbsp;</th>
-                                <th scope="col">&nbsp;</th>
-                            </tr>
-                        </thead>
                         <tbody>
                             {{!-- Lấy dữ liệu bỏ vảo view --}}
                             {{#each this.listproduct}}
@@ -25,7 +35,7 @@
                                 <td>
                                     <img src="{{img}}" alt="imgage product" style="width:50px;height:50px">
                                 </td>                                
-                                <td class="tm-product-name"><a href="/edit-product?id={{id}}" style="color:white;">{{tensanpham}}</td>
+                                <td class="tm-product-name"><a href="/edit-product?id={{id}}" style="color:white;">{{tensanpham}}</a></td>
                                 <td>{{sl}}</td>
                                 <td>{{dongia}}</td>
                                 <td>{{tentacgia}}</td>
@@ -44,107 +54,60 @@
                 <a href="add-product" class="btn btn-primary btn-block text-uppercase mb-3">Thêm sản phẩm</a>
             </div>
         </div>
-        <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 tm-block-col">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 tm-block-col">
             <div class="tm-bg-primary-dark tm-block tm-block-product-categories">
-                <h2 class="tm-block-title">Danh mục sản phẩm</h2>
-                <div class="tm-product-table-container">
-                    <table class="table tm-table-small tm-product-table">
+                <h2 class="tm-block-title">Danh sách thể loại</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Mã thể loại&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                            <th scope="col">Tên thể loại&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                            <th scope="col">Chỉnh sửa</th>
+                            <th scope="col">Xóa</th>
+                        </tr>
+                    </thead>
+                </table>
+                <div class="tm-product-table-container table-category">
+                    <table class="table tm-table-small tm-product-table table-striped">
                         <tbody>
+                            {{#each this.listcate}}
                             <tr>
-                                <td class="tm-product-name">Product Category 1</td>
-                                <td class="text-center">
-                                    <a href="#" class="tm-product-delete-link">
-                                        <i class="far fa-trash-alt tm-product-delete-icon"></i>
-                                    </a>
-                                </td>
+                                <form action="/edit-category?id={{this.id_theloai}}" method = "POST">
+                                    <td class="form-group tm-categories-name">
+                                        <input type="text" class="form-control" name="id_theloai" value="{{id_theloai}}">
+                                    </td>
+                                    <td class="form-group tm-categories-name">
+                                        <input type="text" class="form-control" name="ten" value="{{ten}}">
+                                    </td>
+                                    <td class="text-center">
+                                        <button type="submit" class="btn btn-primary"><i class="fas fa-edit tm-product-delete-icon"></i></button>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="/delete-category?id={{id_theloai}}" class="tm-product-delete-link">
+                                            <i class="far fa-trash-alt tm-product-delete-icon"></i>
+                                        </a>
+                                    </td>
+                                </form>
                             </tr>
-                            <tr>
-                                <td class="tm-product-name">Product Category 2</td>
-                                <td class="text-center">
-                                    <a href="#" class="tm-product-delete-link">
-                                        <i class="far fa-trash-alt tm-product-delete-icon"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="tm-product-name">Product Category 3</td>
-                                <td class="text-center">
-                                    <a href="#" class="tm-product-delete-link">
-                                        <i class="far fa-trash-alt tm-product-delete-icon"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="tm-product-name">Product Category 4</td>
-                                <td class="text-center">
-                                    <a href="#" class="tm-product-delete-link">
-                                        <i class="far fa-trash-alt tm-product-delete-icon"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="tm-product-name">Product Category 5</td>
-                                <td class="text-center">
-                                    <a href="#" class="tm-product-delete-link">
-                                        <i class="far fa-trash-alt tm-product-delete-icon"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="tm-product-name">Product Category 6</td>
-                                <td class="text-center">
-                                    <a href="#" class="tm-product-delete-link">
-                                        <i class="far fa-trash-alt tm-product-delete-icon"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="tm-product-name">Product Category 7</td>
-                                <td class="text-center">
-                                    <a href="#" class="tm-product-delete-link">
-                                        <i class="far fa-trash-alt tm-product-delete-icon"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="tm-product-name">Product Category 8</td>
-                                <td class="text-center">
-                                    <a href="#" class="tm-product-delete-link">
-                                        <i class="far fa-trash-alt tm-product-delete-icon"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="tm-product-name">Product Category 9</td>
-                                <td class="text-center">
-                                    <a href="#" class="tm-product-delete-link">
-                                        <i class="far fa-trash-alt tm-product-delete-icon"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="tm-product-name">Product Category 10</td>
-                                <td class="text-center">
-                                    <a href="#" class="tm-product-delete-link">
-                                        <i class="far fa-trash-alt tm-product-delete-icon"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="tm-product-name">Product Category 11</td>
-                                <td class="text-center">
-                                    <a href="#" class="tm-product-delete-link">
-                                        <i class="far fa-trash-alt tm-product-delete-icon"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                            {{/each}}
                         </tbody>
                     </table>
                 </div>
                 <!-- table container -->
-                <button class="btn btn-primary btn-block text-uppercase mb-3">
-                    Thêm danh mục
-                </button>
+                <form action="/add-category" method = "POST">
+                    <div class="row">
+                        <!-- <h2>Thêm danh mục</h2> -->
+                        <div class="form-group col-lg-6">
+                            <label for="id_theloai">Mã thể loại</label>
+                            <input type="text" class="form-control" name="id_theloai">
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <label for="ten">Tên thể loại</label>
+                            <input type="text" class="form-control" name="ten">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary text-uppercase btn-block">Thêm thể loại mới</button>
+                </form>
             </div>
         </div> 
     </div>
