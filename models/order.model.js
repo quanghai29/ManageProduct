@@ -12,6 +12,8 @@ module.exports = {
         return db.patch('donhang', entity, condition);
     },
 
+    search: id => db.search(`select * from donhang where id = ${id}`),
+
     idnow: () => db.load(`SELECT max(id) as id FROM donhang`),
 
     revenue: date => {

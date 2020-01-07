@@ -199,3 +199,13 @@ module.exports.cartInfo = async(req, res, next) => {
   });
 }
 
+module.exports.searchOrder = async (req, res, next) => {
+  let id = +req.query.search;
+  const listorder = await orderModel.search(id);
+  res.render('list-order', {
+    title: 'Tìm kiếm sản phẩm', 
+    listorder,
+    id
+  });
+}
+

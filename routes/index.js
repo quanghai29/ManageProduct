@@ -163,6 +163,9 @@ router.get('/cart-info', cartController.cartInfo);
 /* GET delete-order page. */
 router.get('/delete-order', cartController.delOrder);
 
+/* get add-category. */
+router.get('/search-order', cartController.searchOrder);
+
 /* GET search-product page. */
 router.get('/search-cart', cartController.search);
 /* GET delete-cart page. */
