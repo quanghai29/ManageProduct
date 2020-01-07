@@ -114,9 +114,21 @@ module.exports.postAddOrder = async (req, res, next) => {
     arr[i].id_sanpham = item['id'];
     arr[i].sl = item['sl'];
     arr[i].thanhtien = item['tongtien'];
+    detailModel.add(arr[i]);
+    const oldsl = await productModel.getPro(arr[i].id_sanpham);
+    let old = 0;
+    oldsl.forEach(function(entry){
+      old = entry['sl'];
+    });
+    var en = new Object();
+    en.id = arr[i].id_sanpham;
+    en.sl = old - arr[i].sl;
+    productModel.patch(en);
     i++;
   };
   
+  
+
   cartModel.clear();
   listorder = await orderModel.all();
   listdetailorder = await detailModel.all();
@@ -130,9 +142,22 @@ module.exports.postAddOrder = async (req, res, next) => {
 
 module.exports.delOrder = async(req, res, next) => {
   orderModel.del(req.query.id);
-  detailModel.del(req.query.id);
   listorder = await orderModel.all();
   listdetailorder = await detailModel.all();
+
+  const order = await detailModel.getDetailOrder(req.query.id);
+  detailModel.del(req.query.id);
+  for(item of order){
+    const oldsl = await productModel.getPro(item.id_sanpham);
+    let old = 0;
+    oldsl.forEach(function(entry){
+      old = entry['sl'];
+    });
+    var en = new Object();
+    en.id = item.id_sanpham;
+    en.sl = old + item.sl;
+    productModel.patch(en);
+  }
 
   res.render('list-order',{
     title: 'Danh sách đơn hàng',
