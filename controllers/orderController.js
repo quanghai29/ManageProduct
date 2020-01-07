@@ -1,7 +1,11 @@
 
 var productModel = require('../models/product.model');
-const orderModel = require('../models/order.model');
-const detailModel = require('../models/order_detail.model');
+var cartModel = require('../models/cart.model');
+var categoryModel = require('../models/category.model');
+var orderModel = require('../models/order.model');
+var detailModel = require('../models/order_detail.model');
+
+const handlebars= require('handlebars');
 
 module.exports.showChart = async function(req, res, next) {
         const data1 = await orderModel.revenue();

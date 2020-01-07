@@ -33,7 +33,14 @@ router.get('/products', productController.showProduct);
 router.get('/cart', cartController.showCart);
 router.get('/add-cart', cartController.getAdd);
 router.post('/add-cart', cartController.postAdd);
-router.post('/add-order', cartController.postAddOrder);
+
+router.post('/list-order', cartController.postAddOrder);
+router.get('/list-order', function(req, res, next) {
+  res.render('list-order');
+});
+
+router.get('/delete-order', cartController.delOrder);
+
 /* GET search-product page. */
 router.get('/search-cart', cartController.search);
 /* GET delete-cart page. */

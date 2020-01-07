@@ -1,5 +1,6 @@
 const db = require('../utils/db');
 
+
 module.exports = {
     all: id => db.load(`select * from donhang`),
     add: entity => db.add('donhang', entity),

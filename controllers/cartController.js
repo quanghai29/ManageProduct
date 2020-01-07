@@ -118,9 +118,25 @@ module.exports.postAddOrder = async (req, res, next) => {
   };
   
   cartModel.clear();
+  listorder = await orderModel.all();
+  listdetailorder = await detailModel.all();
 
-  
-
-
-  res.redirect('cart');
+  res.render('list-order',{
+    title: 'Danh sách đơn hàng',
+    listorder,
+    listdetailorder
+  });
 };
+
+module.exports.delOrder = async(req, res, next) => {
+  orderModel.del(req.query.id);
+  detailModel.del(req.query.id);
+  listorder = await orderModel.all();
+  listdetailorder = await detailModel.all();
+
+  res.render('list-order',{
+    title: 'Danh sách đơn hàng',
+    listorder,
+    listdetailorder
+  });
+}
