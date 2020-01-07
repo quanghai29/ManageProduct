@@ -98,8 +98,9 @@ module.exports.postAddOrder = async (req, res, next) => {
 
   req.body['tongtien'] = thanhtien;
   req.body['thue'] = thanhtien*0.1;
-  const dataOrder = orderModel.add(req.body);
-
+  const dataOrder = await orderModel.add(req.body);
+  console.log(dataOrder);
+  
   const idnow = await orderModel.idnow();
   let id = 0;
   idnow.forEach(function(entry){
@@ -112,6 +113,7 @@ module.exports.postAddOrder = async (req, res, next) => {
     arr[i] = new Object();
     arr[i].id_donhang = id;
     arr[i].id_sanpham = item['id'];
+    console.log(id);
     arr[i].sl = item['sl'];
     arr[i].thanhtien = item['tongtien'];
     detailModel.add(arr[i]);
