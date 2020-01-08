@@ -30,7 +30,7 @@ module.exports.getAdd = async (req, res, next) => {
 }
 
 module.exports.postAdd = async (req, res, next) => {
-  req.body['id_seller'] = 1;
+  req.body['id_seller'] = req.session.role;
   var err = 0;
   const row = await productModel.getPro(req.body.id_product);
   if(row[0].sl - req.body.sl >= 0){
@@ -87,7 +87,7 @@ res.render('cart',{
 
 module.exports.postAddOrder = async (req, res, next) => { 
   const dataCart = await cartModel.all();
-  req.body['id_seller'] = 1;
+  req.body['id_seller'] = req.session.role;
   let thanhtien = 0;
   dataCart.forEach(function(entry){
     thanhtien+= entry['tongtien'];
@@ -177,7 +177,7 @@ module.exports.editOrder = async(req, res, next) => {
   let i = 0;
   cartModel.clear();
   for(item of order){
-    arr.id_seller = 1;
+    arr.id_seller = req.session.role;
     arr.id_product = item.id_sanpham;
     arr.sl = item.sl;
     //console.log(arr);
