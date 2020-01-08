@@ -47,13 +47,16 @@ router.get('/login', async (req, res) => {
 router.post('/login', async (req, res) => {
   const user = await userModel.singleByUsername(req.body.username);
   if (user === null)
-    throw new Error('Invalid username or password.');
+    return res.render('login', {
+      layout: false,
+      err_message: 'Login failed'
+    });
 
   const rs = bcrypt.compareSync(req.body.password, user.password);
   if (rs === false)
     return res.render('login', {
       layout: false,
-      err_message: 'Login failed '
+      err_message: 'Login failed'
     });
 
   delete user.f_Password;
