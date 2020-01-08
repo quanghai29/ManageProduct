@@ -120,5 +120,28 @@ module.exports.revenueMonth = async function(req, res, next) {
     sum+=i.tongtien;
   });
   
-  res.render('month', {title : 'Báo cáo theo tháng',data, tongtien: sum});
+  const dien = 1000000;
+  const nuoc = 500000;
+  const luongNV = 10000000;
+  
+  const loinhuan = sum*0.2-(dien+nuoc+luongNV);
+  res.render('month', {title : 'Báo cáo theo tháng',data, tongtien: sum, loinhuan});
+}
+
+module.exports.revenueDay = async function(req, res, next) {
+  date = new Date();
+  m = date.getMonth()+1;
+  y = date.getYear()+1900;
+  d = date.getDate();
+  sum = 0;
+  
+  
+  data = await detailModel.revenueDay({day: d,month: m, year: y});
+
+  data.forEach(function(i){
+    sum+=i.tongtien;
+  });
+
+  
+  res.render('day', {title : 'Báo cáo theo ngày',data, tongtien: sum});
 }

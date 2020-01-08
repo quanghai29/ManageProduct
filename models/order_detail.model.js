@@ -23,5 +23,10 @@ module.exports = {
     revenueMonth:date=>db.load(`SELECT sp.tensanpham, sum(ct.sl) as tongsl, sum(ct.thanhtien) as tongtien
     from ct_donhang ct inner join sanpham sp on ct.id_sanpham = sp.id inner join donhang dh on ct.id_donhang=dh.id
     where year(dh.ngaylap) = ${date.year} and month(dh.ngaylap) = ${date.month}
+    group by ct.id_sanpham`),
+    
+    revenueDay:date=>db.load(`SELECT sp.tensanpham, sum(ct.sl) as tongsl, sum(ct.thanhtien) as tongtien
+    from ct_donhang ct inner join sanpham sp on ct.id_sanpham = sp.id inner join donhang dh on ct.id_donhang=dh.id
+    where year(dh.ngaylap) = ${date.year} and month(dh.ngaylap) = ${date.month} and day(dh.ngaylap)=${date.day}
     group by ct.id_sanpham`)
 };

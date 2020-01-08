@@ -91,9 +91,7 @@ router.get('/delete-category',roleWareHouse, productController.delCate);
 
 
 /* GET day page. */
-router.get('/day',roleAdmin, function(req, res, next) {
-  res.render('day');
-});
+router.get('/day',roleAdmin, orderController.revenueDay);
 
 /* GET week page. */
 router.get('/week',roleAdmin, function(req, res, next) {
