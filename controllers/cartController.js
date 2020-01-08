@@ -194,7 +194,7 @@ module.exports.editOrder = async(req, res, next) => {
       thanhtien+= entry['tongtien'];
 });
   res.render('cart-info',{
-    title: 'Sản phẩm',
+    title: 'Thôg tin đơn hàng',
     listproduct,
     listcate,
     thanhtien
@@ -214,11 +214,20 @@ module.exports.cartInfo = async(req, res, next) => {
 
 module.exports.searchOrder = async (req, res, next) => {
   let id = +req.query.search;
-  const listorder = await orderModel.search(id);
+  let err = 0;
+  const list = await orderModel.search(id);
+  if(list[0] == null){
+    err = 1;
+    listorder = await orderModel.all();
+  }
+  else{
+    listorder = await orderModel.search(id);
+  }
   res.render('list-order', {
-    title: 'Tìm kiếm sản phẩm', 
+    title: 'Tìm kiếm đơn hàng', 
     listorder,
-    id
+    id,
+    err
   });
 }
 
