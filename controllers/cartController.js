@@ -212,6 +212,17 @@ module.exports.cartInfo = async(req, res, next) => {
   });
 }
 
+module.exports.listOrder = async(req, res, next) => {
+  listorder = await orderModel.all();
+  listdetailorder = await detailModel.all();
+
+  res.render('list-order',{
+    title: 'Danh sách đơn hàng',
+    listorder,
+    listdetailorder
+  });
+}
+
 module.exports.searchOrder = async (req, res, next) => {
   let id = +req.query.search;
   let err = 0;
