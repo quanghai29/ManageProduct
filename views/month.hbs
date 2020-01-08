@@ -5,29 +5,29 @@
         </div>
     </div>
     <!-- row -->
-    <div class="row tm-content-row">
-        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
-            <div class="tm-bg-primary-dark tm-block">
-                <h2 class="tm-block-title">Latest Hits</h2>
-                <canvas id="lineChart"></canvas>
+    <div class="col-12 tm-block-col">
+            <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll">
+                <h2 class="tm-block-title" id="id_tongdoanhthu">Tổng doanh thu: </h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Tên sản phẩm</th>
+                            <th scope="col">Tổng số lượng</th>
+                            <th scope="col">Tổng tiền thu</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each data}}
+                        <tr>
+                            <th scope="row"><b>{{this.tensanpham}}</b></th>
+                            <td>{{this.tongsl}}</td>
+                            <td>{{this.tongtien}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
             </div>
         </div>
-        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
-            <div class="tm-bg-primary-dark tm-block">
-                <h2 class="tm-block-title">Performance</h2>
-                <canvas id="barChart"></canvas>
-            </div>
-        </div>
-        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
-            <div class="tm-bg-primary-dark tm-block tm-block-taller">
-                <h2 class="tm-block-title">Storage Information</h2>
-                <div id="pieChartContainer">
-                    <canvas id="pieChart" class="chartjs-render-monitor" width="200" height="200"></canvas>
-                </div>
-            </div>
-        </div>
-
-    </div>
 </div>
 
 <script src="js/jquery-3.3.1.min.js"></script>
@@ -39,33 +39,3 @@
 <script src="js/bootstrap.min.js"></script>
 <!-- https://getbootstrap.com/ -->
 <script src="js/tooplate-scripts.js"></script>
-<script>
-    Chart.defaults.global.defaultFontColor = 'white';
-    let ctxLine,
-        ctxBar,
-        ctxPie,
-        optionsLine,
-        optionsBar,
-        optionsPie,
-        configLine,
-        configBar,
-        configPie,
-        lineChart;
-    barChart, pieChart;
-    // DOM is ready
-    $(function () {
-        
-        const json = '{{json}}';
-        const data = json.replace(/&quot;/g,'"');
-        
-        const values = JSON.parse(data);
-        drawLineChart(values.revenue_count); // Line Chart
-        drawBarChart(values.revenue); // Bar Chart
-        drawPieChart(values.storage); // Pie Chart
-
-        $(window).resize(function () {
-            updateLineChart();
-            updateBarChart();
-        });
-    })
-</script>

@@ -11,10 +11,6 @@ module.exports = {
         console.log(condition, entity);
         return db.patch('ct_donhang', entity, condition);
     },
-    revenue: date => {
-        console.log(date);
-        return db.load(`select * from ct_donhang where year(ngaylap) = ${date.year} and month(ngaylap) = ${date.month}`);
-    },
     revenue: (thang, nam, ten)=> {
         return db.load(`SELECT month(dh.ngaylap) as thang, year(dh.ngaylap) as nam,sp.tensanpham , sum(ct.sl) as sl 
     FROM ct_donhang ct inner join donhang dh on ct.id_donhang = dh.id inner join sanpham sp on sp.id = ct.id_sanpham
@@ -23,5 +19,9 @@ module.exports = {
     topProduct:()=>db.load(`select distinct tensanpham
     from ct_donhang ct inner join donhang dh on ct.id_donhang = dh.id inner join sanpham sp on sp.id = ct.id_sanpham
     order by ngaylap desc
-    limit 6`)
+    limit 6`),
+    revenueMonth:date=>db.load(`SELECT sp.tensanpham, sum(ct.sl) as tongsl, sum(ct.thanhtien) as tongtien
+    from ct_donhang ct inner join sanpham sp on ct.id_sanpham = sp.id inner join donhang dh on ct.id_donhang=dh.id
+    where year(dh.ngaylap) = ${date.year} and month(dh.ngaylap) = ${date.month}
+    group by ct.id_sanpham`)
 };
