@@ -46,9 +46,7 @@ router.post('/add-cart',authRole, cartController.postAdd);
 /* POST list-order page. */
 router.post('/list-order',authRole, cartController.postAddOrder);
 /* GET list-order page. */
-router.get('/list-order', function(req, res, next) {
-  res.render('list-order');
-});
+router.get('/list-order',authRole, cartController.listOrder);
 /* GET edit-order page. */
 router.get('/edit-order',authRole, cartController.editOrder);
 /* GET cart-info page. */

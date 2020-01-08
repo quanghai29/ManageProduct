@@ -30,10 +30,31 @@ module.exports.getAdd = async (req, res, next) => {
 }
 
 module.exports.postAdd = async (req, res, next) => {
-  console.log(req.body);
-  req.body['id_seller'] = 1;
-  const dataProduct = await cartModel.add(req.body);
-  res.redirect('cart');
+  req.body['id_seller'] = req.session.role;
+  var err = 0;
+  const row = await productModel.getPro(req.body.id_product);
+  if(row[0].sl - req.body.sl >= 0){
+    const dataProduct = await cartModel.add(req.body);
+  }
+  else{
+    err = 1;
+  }
+  const [listproduct, listcate] = await Promise.all([
+    cartModel.all(),
+    categoryModel.all()
+    ]) 
+    let thanhtien = 0;
+    listproduct.forEach(function(entry) {
+      thanhtien+= entry['tongtien'];
+});
+
+  res.render('cart',{
+    title: 'Sản phẩm',
+    listproduct,
+    listcate,
+    thanhtien,
+    err
+  });
 }
 
 
@@ -66,7 +87,7 @@ res.render('cart',{
 
 module.exports.postAddOrder = async (req, res, next) => { 
   const dataCart = await cartModel.all();
-  req.body['id_seller'] = 1;
+  req.body['id_seller'] = req.session.role;
   let thanhtien = 0;
   dataCart.forEach(function(entry){
     thanhtien+= entry['tongtien'];
@@ -86,7 +107,7 @@ module.exports.postAddOrder = async (req, res, next) => {
   req.body['tongtien'] = thanhtien;
   req.body['thue'] = thanhtien*0.1;
   const dataOrder = await orderModel.add(req.body);
-  console.log(dataOrder);
+  //console.log(dataOrder);
   
   const idnow = await orderModel.idnow();
   let id = 0;
@@ -105,13 +126,9 @@ module.exports.postAddOrder = async (req, res, next) => {
     arr[i].thanhtien = item['tongtien'];
     await detailModel.add(arr[i]);
     const oldsl = await productModel.getPro(arr[i].id_sanpham);
-    let old = 0;
-    oldsl.forEach(function(entry){
-      old = entry['sl'];
-    });
     var en = new Object();
     en.id = arr[i].id_sanpham;
-    en.sl = old - arr[i].sl;
+    en.sl = oldsl[0].sl - arr[i].sl;
     await productModel.patch(en);
     i++;
   };
@@ -136,13 +153,9 @@ module.exports.delOrder = async(req, res, next) => {
   detailModel.del(req.query.id);
   for(item of order){
     const oldsl = await productModel.getPro(item.id_sanpham);
-    let old = 0;
-    oldsl.forEach(function(entry){
-      old = entry['sl'];
-    });
     var en = new Object();
     en.id = item.id_sanpham;
-    en.sl = old + item.sl;
+    en.sl = oldsl[0].sl + item.sl;
     await productModel.patch(en);
   }
 
@@ -158,16 +171,16 @@ module.exports.delOrder = async(req, res, next) => {
 
 module.exports.editOrder = async(req, res, next) => {
   const order = await detailModel.getDetailOrder(req.query.id);
-  console.log(order);
+  //console.log(order);
   var arr = new Object();
   
   let i = 0;
   cartModel.clear();
   for(item of order){
-    arr.id_seller = 1;
+    arr.id_seller = req.session.role;
     arr.id_product = item.id_sanpham;
     arr.sl = item.sl;
-    console.log(arr);
+    //console.log(arr);
     await cartModel.add(arr);
     i++;
   };
@@ -181,7 +194,7 @@ module.exports.editOrder = async(req, res, next) => {
       thanhtien+= entry['tongtien'];
 });
   res.render('cart-info',{
-    title: 'Sản phẩm',
+    title: 'Thôg tin đơn hàng',
     listproduct,
     listcate,
     thanhtien
@@ -199,13 +212,33 @@ module.exports.cartInfo = async(req, res, next) => {
   });
 }
 
+module.exports.listOrder = async(req, res, next) => {
+  listorder = await orderModel.all();
+  listdetailorder = await detailModel.all();
+
+  res.render('list-order',{
+    title: 'Danh sách đơn hàng',
+    listorder,
+    listdetailorder
+  });
+}
+
 module.exports.searchOrder = async (req, res, next) => {
   let id = +req.query.search;
-  const listorder = await orderModel.search(id);
+  let err = 0;
+  const list = await orderModel.search(id);
+  if(list[0] == null){
+    err = 1;
+    listorder = await orderModel.all();
+  }
+  else{
+    listorder = await orderModel.search(id);
+  }
   res.render('list-order', {
-    title: 'Tìm kiếm sản phẩm', 
+    title: 'Tìm kiếm đơn hàng', 
     listorder,
-    id
+    id,
+    err
   });
 }
 

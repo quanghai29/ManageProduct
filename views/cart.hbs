@@ -1,5 +1,11 @@
 <div class="container mt-5">
     <div class="row tm-content-row m-auto">
+        {{#if err}}
+..          <div class="alert alert-danger m-auto" role="alert">
+            Sản phẩm không đủ số lượng
+            </div>
+        {{/if}}
+        
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 tm-block-col">
             <div class="tm-bg-primary-dark tm-block tm-block-search">
                 <h2 class="tm-block-title">Tìm kiếm</h2>
@@ -51,6 +57,7 @@
                     <p class="text-right text-white">Thành Tiền: {{this.thanhtien}} VNĐ</p>
                     <a href="add-cart" class="btn btn-primary btn-block text-uppercase mb-3">Thêm Sản Phẩm Vào Đơn Hàng</a>
                     <button type="submit" class="btn btn-primary btn-block text-uppercase mb-3">hoàn tất đơn Hàng</button>
+                    <a href="list-order" class="btn btn-primary btn-block text-uppercase mb-3">danh sách đơn hàng</a>
                 </div>
             </form>
         </div>
