@@ -111,7 +111,14 @@ module.exports.revenueMonth = async function(req, res, next) {
   d = new Date();
   m = d.getMonth()+1;
   y = d.getYear()+1900;
+  sum = 0;
+  
   
   data = await detailModel.revenueMonth({month: m, year: y});
-  res.render('month', {title : 'Báo cáo theo tháng',data});
+
+  data.forEach(function(i){
+    sum+=i.tongtien;
+  });
+  
+  res.render('month', {title : 'Báo cáo theo tháng',data, tongtien: sum});
 }
