@@ -126,71 +126,71 @@ router.get('/',orderController.showChart);
 
 
 /* GET account page. */
-router.get('/accounts',async function(req, res, next) {
+router.get('/accounts',authRole,async function(req, res, next) {
   const users = await userModel.allName();
   const json = JSON.stringify(users);
   
   res.render('accounts', {title : 'Tài khoản', users: users, json: json});
 });
 
-router.post('/accounts', async  function(req, res, next){
+router.post('/accounts',authRole, async  function(req, res, next){
   userInfo = req.body;
   await userModel.patch(userInfo);
   res.redirect('/accounts');
 });
 
 /* GET products page. */
-router.get('/products', productController.showProduct);
+router.get('/products',authRole, productController.showProduct);
 
 /* GET cart page. */
-router.get('/cart', cartController.showCart);
+router.get('/cart',authRole, cartController.showCart);
 
 /* GET add-cart page. */
-router.get('/add-cart', cartController.getAdd);
+router.get('/add-cart',authRole, cartController.getAdd);
 /* POST add-cart page. */
-router.post('/add-cart', cartController.postAdd);
+router.post('/add-cart',authRole, cartController.postAdd);
 
 /* POST list-order page. */
-router.post('/list-order', cartController.postAddOrder);
+router.post('/list-order',authRole, cartController.postAddOrder);
 /* GET list-order page. */
 router.get('/list-order', function(req, res, next) {
   res.render('list-order');
 });
 /* GET edit-order page. */
-router.get('/edit-order', cartController.editOrder);
+router.get('/edit-order',authRole, cartController.editOrder);
 /* GET cart-info page. */
-router.get('/cart-info', cartController.cartInfo);
+router.get('/cart-info',authRole, cartController.cartInfo);
 /* GET delete-order page. */
-router.get('/delete-order', cartController.delOrder);
+router.get('/delete-order',authRole, cartController.delOrder);
 
 /* get add-category. */
-router.get('/search-order', cartController.searchOrder);
+router.get('/search-order',authRole, cartController.searchOrder);
 
 /* GET search-product page. */
-router.get('/search-cart', cartController.search);
+router.get('/search-cart',authRole, cartController.search);
 /* GET delete-cart page. */
-router.get('/delete-cart', cartController.delCart);
+router.get('/delete-cart',authRole, cartController.delCart);
 
 /* GET add-product page. */
-router.get('/add-product', productController.getAdd);
+router.get('/add-product',authRole, productController.getAdd);
 
 /* POST add-product page. */
-router.post('/add-product', productController.postAdd);
+router.post('/add-product',authRole, productController.postAdd);
 
 /* GET edit-product page. */
-router.get('/edit-product', productController.getEditPro);
+router.get('/edit-product',authRole, productController.getEditPro);
 
 /* POST edit-product page. */
-router.post('/edit-product', productController.postEditPro);
+router.post('/edit-product',authRole, productController.postEditPro);
 
 /* GET delete-product page. */
-router.get('/delete-product', productController.delPro);
+router.get('/delete-product',authRole, productController.delPro);
 
 /* GET search-product page. */
-router.get('/search-product', productController.search);
+router.get('/search-product',authRole, productController.search);
 
 /* POST add-category. */
-router.post('/add-category', productController.addCate);
+router.post('/add-category',authRole, productController.addCate);
 
 /* POST edit-category page. */
 router.post('/edit-category', productController.editCate);
