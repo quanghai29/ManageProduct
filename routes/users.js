@@ -15,6 +15,14 @@ router.get('/signup',roleAdmin, async (req, res) => {
 
 
 router.post('/signup',roleAdmin, async (req, res) => {
+  //Kiểm tra username duy nhất
+  const user = await userModel.singleByUsername(req.body.username);
+  if (user !== null)
+  return res.render('signup', {
+    layout: false,
+    err_message: 'Tên đăng nhập đã tồn tại'
+  });
+
   const N = 10;
   var gioitinh='Nam';
   const hash = bcrypt.hashSync(req.body.raw_password, N);
