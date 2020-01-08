@@ -28,7 +28,7 @@ CREATE TABLE `cart` (
   `id_product` int(11) NOT NULL,
   `sl` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -54,7 +54,7 @@ CREATE TABLE `ct_donhang` (
   `thanhtien` float DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -63,7 +63,7 @@ CREATE TABLE `ct_donhang` (
 
 LOCK TABLES `ct_donhang` WRITE;
 /*!40000 ALTER TABLE `ct_donhang` DISABLE KEYS */;
-INSERT INTO `ct_donhang` VALUES (8,4,2,120000,5),(9,6,4,192000,6),(9,4,4,240000,7);
+INSERT INTO `ct_donhang` VALUES (8,4,2,120000,5),(9,6,4,192000,6),(9,4,4,240000,7),(10,2,10,570000,8),(10,6,1,48000,9);
 /*!40000 ALTER TABLE `ct_donhang` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -81,7 +81,7 @@ CREATE TABLE `donhang` (
   `thue` float DEFAULT NULL,
   `id_seller` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -90,7 +90,7 @@ CREATE TABLE `donhang` (
 
 LOCK TABLES `donhang` WRITE;
 /*!40000 ALTER TABLE `donhang` DISABLE KEYS */;
-INSERT INTO `donhang` VALUES (7,'2020-01-07 22:58:23',114000,11400,1),(8,'2020-01-07 23:07:54',120000,12000,1),(9,'2020-01-07 23:21:53',432000,43200,1);
+INSERT INTO `donhang` VALUES (7,'2020-01-07 22:58:23',114000,11400,1),(8,'2020-01-07 23:07:54',120000,12000,1),(9,'2020-01-07 23:21:53',432000,43200,1),(10,'2020-01-08 09:32:12',618000,61800,1),(11,'2020-01-08 09:34:36',0,0,1);
 /*!40000 ALTER TABLE `donhang` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,7 +139,7 @@ CREATE TABLE `members` (
   `gioitinh` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -148,7 +148,7 @@ CREATE TABLE `members` (
 
 LOCK TABLES `members` WRITE;
 /*!40000 ALTER TABLE `members` DISABLE KEYS */;
-INSERT INTO `members` VALUES (11,'haimtp','$2a$10$pQv8KxsCz0iyJfmhA7sYOe4YWkmVKO6sNRMDb/UnPhAGLD4mQEPb2','LÊ QUANG HẢI',1,'2019-12-08','ktx khu B Đại Học Quốc Gia tp Hồ Chí Minh, linh trung, Thủ Đức','091234589',900000,'lequanghai540@gmail.com','Nam'),(12,'hai','$2a$10$4W/y5PI1qlRxO7Te8R9SzOvIjIiaXE4lrA1tgkN23w6zoRChEkGVG','LÊ QUANG HẢI',2,'2020-01-08','ktx khu B Đại Học Quốc Gia tp Hồ Chí Minh, linh trung, Thủ Đức',NULL,NULL,'lequanghai540@gmail.com','Nam');
+INSERT INTO `members` VALUES (11,'haimtp','$2a$10$pQv8KxsCz0iyJfmhA7sYOe4YWkmVKO6sNRMDb/UnPhAGLD4mQEPb2','LÊ QUANG HẢI',1,'2019-12-08','ktx khu B Đại Học Quốc Gia tp Hồ Chí Minh, linh trung, Thủ Đức','091234589',900000,'lequanghai540@gmail.com','Nam'),(12,'hai','$2a$10$4W/y5PI1qlRxO7Te8R9SzOvIjIiaXE4lrA1tgkN23w6zoRChEkGVG','LÊ QUANG HẢI',2,'2020-01-08','ktx khu B Đại Học Quốc Gia tp Hồ Chí Minh, linh trung, Thủ Đức',NULL,NULL,'lequanghai540@gmail.com','Nam'),(13,'mtp','$2a$10$6FgkIfN83sBUbxiysACTv.yn/3nA2HLNL30GkBemULc389kA9EAmW','LÊ QUANG HẢI',3,'2020-01-01','ktx khu B Đại Học Quốc Gia tp Hồ Chí Minh, linh trung, Thủ Đức',NULL,NULL,'lequanghai540@gmail.com','Nam');
 /*!40000 ALTER TABLE `members` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -178,7 +178,7 @@ CREATE TABLE `sanpham` (
 
 LOCK TABLES `sanpham` WRITE;
 /*!40000 ALTER TABLE `sanpham` DISABLE KEYS */;
-INSERT INTO `sanpham` VALUES (2,'Đắc nhân tâm',-3,'Dale Carnegie','nhà xuất bản tổng hơp thành phố HCM',1,57000,'https://bookmart.vn/wp-content/uploads/sach-dac-nhan-tam.jpg'),(3,'Tuổi trẻ đáng giá bao nhiêu',50,'Rosie Nguyễn','nhà xuất bản hội nhà văn',1,58000,'https://cdn0.fahasa.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/i/m/image_180164_2_287.jpg'),(4,'Chạm tới giấc mơ',94,'Sơn Tùng MTP','nhà xuất bản Hà Nội',1,60000,'https://salt.tikicdn.com/cache/550x550/media/catalog/product/p/h/photo_2017-09-29_14-07-40.u5567.d20170929.t140824.120862.jpg'),(5,'Tuổi trẻ chúng ta sẽ xanh mãi mãi',-2,'Jinie Lynk','Nhà Xuất Bản Văn Học',2,65000,'https://salt.tikicdn.com/cache/550x550/ts/product/80/42/a3/f0c11d1d1328bc6a1bd05c93fae6be07.jpg'),(6,'Yêu đi đừng sợ',26,'Kim Oanh','Nhà Xuất Bản Phụ Nữ',2,48000,'https://salt.tikicdn.com/cache/550x550/ts/product/a3/9e/8a/f882cd9601f509c666eb4ce51f7dc830.jpg'),(7,'Mặn Béo Chua Nóng',-28,'Samin Nosrat','Nhà Xuất Bản Phụ Nữ',4,360000,'https://salt.tikicdn.com/cache/w1200/ts/product/fc/55/35/f8cc09b40d5e6c04a0337dc5de9274e5.jpg'),(8,'Nấu Ăn Thông Minh - Tập 2',55,' Nguyễn Quốc Thục Phương','Nhà Xuất Bản Thế Giới',4,105000,'https://cf.shopee.vn/file/fde7f31072295c7bbda2ca4442df3dcc'),(9,'90% Trẻ Thông Minh Nhờ ',32,'Urako Kanamori','Nhà Xuất Bản Kim Đồng',6,25000,'https://salt.tikicdn.com/cache/550x550/ts/product/8c/da/cf/a05e93cfaf55e7917ef565717d581770.jpg'),(122,'111111',111,'111111','111111111',3,111,'');
+INSERT INTO `sanpham` VALUES (2,'Đắc nhân tâm',0,'Dale Carnegie','nhà xuất bản tổng hơp thành phố HCM',1,57000,'https://bookmart.vn/wp-content/uploads/sach-dac-nhan-tam.jpg'),(3,'Tuổi trẻ đáng giá bao nhiêu',50,'Rosie Nguyễn','nhà xuất bản hội nhà văn',1,58000,'https://cdn0.fahasa.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/i/m/image_180164_2_287.jpg'),(4,'Chạm tới giấc mơ',94,'Sơn Tùng MTP','nhà xuất bản Hà Nội',1,60000,'https://salt.tikicdn.com/cache/550x550/media/catalog/product/p/h/photo_2017-09-29_14-07-40.u5567.d20170929.t140824.120862.jpg'),(5,'Tuổi trẻ chúng ta sẽ xanh mãi mãi',50,'Jinie Lynk','Nhà Xuất Bản Văn Học',2,65000,'https://salt.tikicdn.com/cache/550x550/ts/product/80/42/a3/f0c11d1d1328bc6a1bd05c93fae6be07.jpg'),(6,'Yêu đi đừng sợ',25,'Kim Oanh','Nhà Xuất Bản Phụ Nữ',2,48000,'https://salt.tikicdn.com/cache/550x550/ts/product/a3/9e/8a/f882cd9601f509c666eb4ce51f7dc830.jpg'),(7,'Mặn Béo Chua Nóng',28,'Samin Nosrat','Nhà Xuất Bản Phụ Nữ',4,360000,'https://salt.tikicdn.com/cache/w1200/ts/product/fc/55/35/f8cc09b40d5e6c04a0337dc5de9274e5.jpg'),(8,'Nấu Ăn Thông Minh - Tập 2',55,' Nguyễn Quốc Thục Phương','Nhà Xuất Bản Thế Giới',4,105000,'https://cf.shopee.vn/file/fde7f31072295c7bbda2ca4442df3dcc'),(9,'90% Trẻ Thông Minh Nhờ ',32,'Urako Kanamori','Nhà Xuất Bản Kim Đồng',6,25000,'https://salt.tikicdn.com/cache/550x550/ts/product/8c/da/cf/a05e93cfaf55e7917ef565717d581770.jpg');
 /*!40000 ALTER TABLE `sanpham` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -215,4 +215,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-07 23:23:06
+-- Dump completed on 2020-01-08 10:33:08
