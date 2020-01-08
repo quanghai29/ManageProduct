@@ -31,30 +31,41 @@ module.exports.getAdd = async (req, res, next) => {
 
 module.exports.postAdd = async (req, res, next) => {
   req.body['id_seller'] = req.session.role;
+  console.log(req.body);
+  console.log(req.body.id_product);
+  console.log(req.body.sl);
   var err = 0;
-  const row = await productModel.getPro(req.body.id_product);
-  if(row[0].sl - req.body.sl >= 0){
-    const dataProduct = await cartModel.add(req.body);
+  if(req.body.id_product == '' || req.body.sl == '' ){
+    err = 1;
+    const listProduct = await  productModel.all();
+    res.render('add-cart', {title : 'Thêm giỏ hàng', listProduct, err});
   }
   else{
-    err = 1;
-  }
-  const [listproduct, listcate] = await Promise.all([
-    cartModel.all(),
-    categoryModel.all()
-    ]) 
-    let thanhtien = 0;
-    listproduct.forEach(function(entry) {
-      thanhtien+= entry['tongtien'];
-});
-
-  res.render('cart',{
-    title: 'Sản phẩm',
-    listproduct,
-    listcate,
-    thanhtien,
-    err
+    const row = await productModel.getPro(req.body.id_product);
+    if(row[0].sl - req.body.sl >= 0){
+      const dataProduct = await cartModel.add(req.body);
+    }
+    else{
+      err = 1;
+    }
+    const [listproduct, listcate] = await Promise.all([
+      cartModel.all(),
+      categoryModel.all()
+      ]) 
+      let thanhtien = 0;
+      listproduct.forEach(function(entry) {
+        thanhtien+= entry['tongtien'];
   });
+  
+    res.render('cart',{
+      title: 'Sản phẩm',
+      listproduct,
+      listcate,
+      thanhtien,
+      err
+    });
+  }
+  
 }
 
 
