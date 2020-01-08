@@ -9,6 +9,8 @@ const orderModel= require('../models/order.model');
 const detailModel =require('../models/order_detail.model');
 const authRole =require('../middlewares/auth.mdw');
 const roleAdmin = require('../middlewares/authAdmin.mdw');
+const roleSeller = require('../middlewares/authSeller.mdw');
+const roleWareHouse = require('../middlewares/authWarehouse.mdw');
 var router = express.Router();
 
 /* GET home page. */
@@ -34,10 +36,10 @@ router.post('/accounts',authRole, async  function(req, res, next){
 router.get('/products',authRole, productController.showProduct);
 
 /* GET cart page. */
-router.get('/cart',authRole, cartController.showCart);
+router.get('/cart',roleSeller, cartController.showCart);
 
 /* GET add-cart page. */
-router.get('/add-cart',authRole, cartController.getAdd);
+router.get('/add-cart',roleSeller, cartController.getAdd);
 /* POST add-cart page. */
 router.post('/add-cart',authRole, cartController.postAdd);
 
@@ -63,31 +65,31 @@ router.get('/search-cart',authRole, cartController.search);
 router.get('/delete-cart',authRole, cartController.delCart);
 
 /* GET add-product page. */
-router.get('/add-product',authRole, productController.getAdd);
+router.get('/add-product',roleWareHouse, productController.getAdd);
 
 /* POST add-product page. */
-router.post('/add-product',authRole, productController.postAdd);
+router.post('/add-product', productController.postAdd);
 
 /* GET edit-product page. */
-router.get('/edit-product',authRole, productController.getEditPro);
+router.get('/edit-product',roleWareHouse, productController.getEditPro);
 
 /* POST edit-product page. */
-router.post('/edit-product',authRole, productController.postEditPro);
+router.post('/edit-product', productController.postEditPro);
 
 /* GET delete-product page. */
-router.get('/delete-product',authRole, productController.delPro);
+router.get('/delete-product',roleWareHouse, productController.delPro);
 
 /* GET search-product page. */
 router.get('/search-product',authRole, productController.search);
 
 /* POST add-category. */
-router.post('/add-category',authRole, productController.addCate);
+router.post('/add-category', productController.addCate);
 
 /* POST edit-category page. */
 router.post('/edit-category', productController.editCate);
 
 /* GET delete-category page. */
-router.get('/delete-category', productController.delCate);
+router.get('/delete-category',roleWareHouse, productController.delCate);
 
 
 /* GET day page. */
