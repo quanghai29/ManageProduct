@@ -3,6 +3,8 @@ var categoryModel = require('../models/category.model');
 
 const handlebars= require('handlebars');
 
+let err = [];
+
 handlebars.registerHelper("cate_select",(selectedCateID, cate_list)=>{
   let html = "";
   cate_list.forEach(function(item) { 
@@ -13,13 +15,13 @@ handlebars.registerHelper("cate_select",(selectedCateID, cate_list)=>{
     else{
       html = html + '<option value="'+item.id_theloai+'">'+item.ten+'</option>';
     } });
-    return new handlebars.SafeString(html);
+  return new handlebars.SafeString(html);
 });
 
 module.exports.showProduct = async (req, res, next) => {
   const [listproduct, listcate] = await Promise.all([
-      productModel.all(),
-      categoryModel.all()
+    productModel.all(),
+    categoryModel.all()
     ]) 
   //console.log(listproduct);
   //console.log(listcate);
@@ -32,13 +34,19 @@ module.exports.showProduct = async (req, res, next) => {
 
 module.exports.getAdd = async (req, res, next) => {
   const listCate = await categoryModel.all();
-  res.render('add-product', {title : 'Thêm sản phẩm', listCate});
+  res.render('add-product', {title : 'Thêm sản phẩm', listCate, err});
 }
 
 module.exports.postAdd = async (req, res, next) => {
   console.log(req.body);
-  const dataProduct = await productModel.add(req.body);
-  res.redirect('products');
+  if (req.body.sl || req.body.dongia) {
+    err.push('Số lượng và đơn giá phải là số nguyên');
+    res.redirect('add-product');
+  } else {
+    const dataProduct = await productModel.add(req.body);
+    err.push('Thêm sản phẩm thành công');
+    res.redirect('products');
+  }
 }
 
 module.exports.getEditPro = async (req, res, next) => {
