@@ -39,7 +39,7 @@ module.exports.getAdd = async (req, res, next) => {
 
 module.exports.postAdd = async (req, res, next) => {
   console.log(req.body);
-  if (req.body.sl || req.body.dongia) {
+  if (req.body.sl < 0 || req.body.dongia < 0) {
     err.push('Số lượng và đơn giá phải là số nguyên');
     res.redirect('add-product');
   } else {
