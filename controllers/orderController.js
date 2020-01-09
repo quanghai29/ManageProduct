@@ -4,6 +4,7 @@ var cartModel = require('../models/cart.model');
 var categoryModel = require('../models/category.model');
 var orderModel = require('../models/order.model');
 var detailModel = require('../models/order_detail.model');
+const userModel= require('../models/user.model');
 
 const handlebars= require('handlebars');
 
@@ -102,10 +103,14 @@ module.exports.showChart = async function(req, res, next) {
           
           datas.storage.values.push(gtsl);
       //---
-      
+      const member = await userModel.getUserName();
         const json = JSON.stringify(datas);
         
-        res.render('index', {title : 'Thống kê',json});
+        res.render('index', {
+          title : 'Thống kê',
+          json,
+          member
+        });
       }
 module.exports.revenueMonth = async function(req, res, next) {
   d = new Date();
@@ -113,6 +118,14 @@ module.exports.revenueMonth = async function(req, res, next) {
   y = d.getYear()+1900;
   sum = 0;
   
+  const dataLuong = await userModel.getLuong();
+
+  let TotalSalary;
+  for (i of dataLuong)
+  {
+    TotalSalary = i.luong;
+    break;
+  }
   
   data = await detailModel.revenueMonth({month: m, year: y});
 
@@ -122,9 +135,8 @@ module.exports.revenueMonth = async function(req, res, next) {
   
   const dien = 1000000;
   const nuoc = 500000;
-  const luongNV = 10000000;
   
-  const loinhuan = sum*0.2-(dien+nuoc+luongNV);
+  const loinhuan = sum*0.2-(dien+nuoc+TotalSalary);
   res.render('month', {title : 'Báo cáo theo tháng',data, tongtien: sum, loinhuan});
 }
 

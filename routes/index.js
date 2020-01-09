@@ -11,6 +11,7 @@ const authRole =require('../middlewares/auth.mdw');
 const roleAdmin = require('../middlewares/authAdmin.mdw');
 const roleSeller = require('../middlewares/authSeller.mdw');
 const roleWareHouse = require('../middlewares/authWarehouse.mdw');
+const bcrypt = require('bcryptjs');
 var router = express.Router();
 
 /* GET home page. */
@@ -28,6 +29,24 @@ router.get('/accounts',authRole,async function(req, res, next) {
 
 router.post('/accounts',authRole, async  function(req, res, next){
   userInfo = req.body;
+
+  if(req.body.password !== req.body.password2)
+  {
+    const users = await userModel.allName();
+    const json = JSON.stringify(users);
+    return res.render('accounts', {
+      title : 'Tài khoản',
+      users: users, json: json,
+      err_message: 'Mật khẩu nhập lại không đúng'
+    });
+  }
+     
+
+    
+  const N=10;
+  const hash = bcrypt.hashSync(req.body.password, N);
+  userInfo.password = hash;
+  console.log(userInfo);
   await userModel.patch(userInfo);
   res.redirect('/accounts');
 });

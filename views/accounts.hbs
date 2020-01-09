@@ -1,162 +1,123 @@
 <div class="container mt-5">
-        <div class="row tm-content-row">
-          <div class="col-12 tm-block-col">
-            <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
-              <h2 class="tm-block-title">Danh sách tài khoản</h2>
-              <p class="text-white">Tài khoản</p>
-              <select class="custom-select" id="selected">
-                {{#each users}}
-                <option value={{username}}>{{username}}/{{ten}}</option>
-                {{/each}}
-              </select>
-              
-            </div>
-          </div>
-        </div>
-        <!-- row -->
-        <div class="row tm-content-row">
-          <div class="tm-block-col tm-col-avatar">
-            <div class="tm-bg-primary-dark tm-block tm-block-avatar">
-              <h2 class="tm-block-title">Đổi ảnh đại diện</h2>
-              <div class="tm-avatar-container">
-                <img
-                  src="img/avatar.png"
-                  alt="Avatar"
-                  class="tm-avatar img-fluid mb-4"
-                />
-                <a href="#" class="tm-avatar-delete-link">
-                  <i class="far fa-trash-alt tm-product-delete-icon"></i>
-                </a>
-              </div>
-              <button class="btn btn-primary btn-block text-uppercase">
-                Tải ảnh lên
-              </button>
-            </div>
-          </div>
-          <div class="tm-block-col tm-col-account-settings">
-            <div class="tm-bg-primary-dark tm-block tm-block-settings">
-              <h2 class="tm-block-title">Chỉnh sửa tài khoản</h2>
-              <form action="/accounts" method="POST" class="tm-signup-form row" id="form-update">
-              
-                <div class="form-group col-lg-12">
-                  <label for="username">Username</label>
-                  <input
-                    id="username"
-                    name="username"
-                    type="text"
-                    class="form-control validate"
-                    readonly = "true"
-                    style="color: black;font-weight: bold;"
-                  />
-                </div>
-                <div class="form-group col-lg-6">
-                  <label for="name">Tên người dùng</label>
-                  <input
-                    id="name"
-                    name="ten"
-                    type="text"
-                    class="form-control validate"
-                  />
-                </div>
-                <div class="form-group col-lg-6">
-                  <label for="email">Email</label>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    class="form-control validate"
-                  />
-                </div>
-                <div class="form-group col-lg-6">
-                  <label for="password">Mật khẩu</label>
-                  <input
-                    id="password"
-                    name="password"
-                    type="password"
-                    class="form-control validate"
-                  />
-                </div>
-                <div class="form-group col-lg-6">
-                  <label for="password2">Nhập lại mật khẩu</label>
-                  <input
-                    id="password2"
-                    name="password2"
-                    type="password"
-                    class="form-control validate"
-                  />
-                </div>
-                <div class="form-group col-lg-6">
-                  <label for="phone">Số điện thoại</label>
-                  <input
-                    id="phone"
-                    name="sdt"
-                    type="tel"
-                    class="form-control validate"
-                  />
-                </div>
-                <div class="form-group col-lg-6">
-                  <label class="tm-hide-sm">&nbsp;</label>
-                  <button
-                    id = "submit"
-                    type="submit"
-                    class="btn btn-primary btn-block text-uppercase"
-                  >
-                    Cập nhật
-                  </button>
-                </div>
-                <div class="col-12">
-                  <button
-                    type="submit"
-                    class="btn btn-primary btn-block text-uppercase"
-                  >
-                    Xóa tài khoản
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
+  <div class="row tm-content-row">
+    <div class="col-12 tm-block-col">
+      <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+        <h2 class="tm-block-title">Danh sách tài khoản</h2>
+        <p class="text-white">Tài khoản</p>
+        <select class="custom-select" id="selected">
+          {{#each users}}
+          <option value={{username}}>{{username}}/{{ten}}</option>
+          {{/each}}
+        </select>
+
       </div>
+    </div>
+  </div>
+  <!-- row -->
+  <div class="row tm-content-row">
+    <div class="tm-block-col tm-col-avatar">
+      <div class="tm-bg-primary-dark tm-block tm-block-avatar">
+        <h2 class="tm-block-title">Đổi ảnh đại diện</h2>
+        <div class="tm-avatar-container">
+          <img src="img/avatar.png" alt="Avatar" class="tm-avatar img-fluid mb-4" />
+          <a href="#" class="tm-avatar-delete-link">
+            <i class="far fa-trash-alt tm-product-delete-icon"></i>
+          </a>
+        </div>
+        <button class="btn btn-primary btn-block text-uppercase">
+          Tải ảnh lên
+        </button>
+      </div>
+    </div>
+    <div class="tm-block-col tm-col-account-settings">
+      <div class="tm-bg-primary-dark tm-block tm-block-settings">
+        <h2 class="tm-block-title">Chỉnh sửa tài khoản</h2>
+        <form action="/accounts" method="POST" class="tm-signup-form row" id="form-update">
 
-      <script>
-        const username = document.getElementById("username");
-        const sele = document.getElementById("selected");
-                
-        username.value = sele.value;
-                const form_update = document.getElementById("form-update");
-                const json = '{{json}}';
-                const data = json.replace(/&quot;/g,'"');
-                const users =JSON.parse(data);
-                for(user of users)
-                {
-                  if(user.username==sele.value)
-                    {
-                      form_update.username.value = user.username;
-                      form_update.name.value = user.ten;
-                      form_update.phone.value = user.sdt;
-                      form_update.email.value=user.email;
-                      break;
-                    }
-                }
-                sele.onchange= function(){
-                for(user of users)
-                {
-                  if(user.username==sele.value)
-                    {
-                      form_update.username.value = user.username;
-                      form_update.name.value = user.ten;
-                      form_update.phone.value = user.sdt;
-                      form_update.email.value=user.email;
-                      break;
-                    }
-                }
-                }
-            
-              
-                
-      </script>
-          <script src="js/jquery-3.3.1.min.js"></script>
-    <!-- https://jquery.com/download/ -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- https://getbootstrap.com/ -->
+          <div class="form-group col-lg-12">
+            <label for="username">Username</label>
+            <input id="username" name="username" type="text" class="form-control validate" readonly="true"
+              style="color: black;font-weight: bold;" />
+          </div>
+          <div class="form-group col-lg-6">
+            <label for="name">Tên người dùng</label>
+            <input id="name" name="ten" type="text" class="form-control validate" />
+          </div>
+          <div class="form-group col-lg-6">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" class="form-control validate" />
+          </div>
+          <div class="form-group col-lg-6">
+            <label for="password">Mật khẩu</label>
+            <input id="password" name="password" type="password" class="form-control validate" />
+          </div>
+          <div class="form-group col-lg-6">
+            <label for="password2">Nhập lại mật khẩu</label>
+            <input id="password2" name="password2" type="password" class="form-control validate" />
+          </div>
+          {{#if err_message}}
+          <div class="alert alert-warning alert-dismissible fade show mt-3 col-lg-12 px-2" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{err_message}}
+          </div>
+          {{/if}}
+          <div class="form-group col-lg-12">
+            <label for="phone">Số điện thoại</label>
+            <input id="phone" name="sdt" type="tel" class="form-control validate" />
+          </div>
+          <div class="form-group col-lg-12">
+            <label class="tm-hide-sm">&nbsp;</label>
+            <button id="submit" type="submit" class="btn btn-primary btn-block text-uppercase">
+              Cập nhật
+            </button>
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary btn-block text-uppercase">
+              Xóa tài khoản
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
+<script>
+  const username = document.getElementById("username");
+  const sele = document.getElementById("selected");
+
+  username.value = sele.value;
+  const form_update = document.getElementById("form-update");
+  const json = '{{json}}';
+  const data = json.replace(/&quot;/g, '"');
+  const users = JSON.parse(data);
+  for (user of users) {
+    if (user.username == sele.value) {
+      form_update.username.value = user.username;
+      form_update.name.value = user.ten;
+      form_update.phone.value = user.sdt;
+      form_update.email.value = user.email;
+      break;
+    }
+  }
+  sele.onchange = function () {
+    for (user of users) {
+      if (user.username == sele.value) {
+        form_update.username.value = user.username;
+        form_update.name.value = user.ten;
+        form_update.phone.value = user.sdt;
+        form_update.email.value = user.email;
+        break;
+      }
+    }
+  }
+
+
+
+</script>
+<script src="js/jquery-3.3.1.min.js"></script>
+<!-- https://jquery.com/download/ -->
+<script src="js/bootstrap.min.js"></script>
+<!-- https://getbootstrap.com/ -->

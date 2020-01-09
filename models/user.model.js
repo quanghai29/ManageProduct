@@ -16,19 +16,11 @@ module.exports = {
     // del: id => db.delete(`delete from sanpham where ProID = ${id}`),
     patch: entity => {
         const condition = { username: entity.username };
-        if(entity.password==entity.password2)
-        {
-          if(entity.password == "")
+        if(entity.password == "")
             delete entity.password;
-          delete entity.username;
-          delete entity.password2;
-          console.log(condition, entity);
-          db.patch('members',entity,condition);
-          
-        }
-        else{
-          console.log("update user failed!");
-          
-        }
-    }
+        delete entity.username;
+        delete entity.password2;
+        db.patch('members',entity,condition);
+    },
+    getLuong:()=> db.load(`select sum(luong) as luong from members`)
 };

@@ -5,11 +5,16 @@
             Sản phẩm không đủ số lượng
             </div>
         {{/if}}
+        {{#if errValidISBN}}
+..          <div class="alert alert-danger m-auto" role="alert">
+            Sản phẩm không tồn tại
+            </div>
+        {{/if}}
         
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 tm-block-col">
             <div class="tm-bg-primary-dark tm-block tm-block-search">
                 <h2 class="tm-block-title">Tìm kiếm</h2>
-                <form action="/search-cart">
+                <form action="search-product">
                     <input class = "form-control validate" type="text" name="search" placeholder="Nhập từ khóa cần tìm">
                     <button type="submit" class="btn btn-primary btn-search"><i class="fas fa-search"></i></button>
                 </form>

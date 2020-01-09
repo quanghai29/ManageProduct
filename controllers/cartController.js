@@ -35,6 +35,7 @@ module.exports.postAdd = async (req, res, next) => {
   console.log(req.body.id_product);
   console.log(req.body.sl);
   var err = 0;
+  var errValidISBN=false;
   if(req.body.id_product == '' || req.body.sl == '' ){
     err = 1;
     const listProduct = await  productModel.all();
@@ -42,12 +43,21 @@ module.exports.postAdd = async (req, res, next) => {
   }
   else{
     const row = await productModel.getPro(req.body.id_product);
-    if(row[0].sl - req.body.sl >= 0){
-      const dataProduct = await cartModel.add(req.body);
+    //Kiểm tra sản phẩm có tồn tại hay không
+    if(row.length === 0 )
+    {
+      errValidISBN=true;
     }
-    else{
-      err = 1;
+    else
+    {
+      if(row[0].sl - req.body.sl >= 0){
+        const dataProduct = await cartModel.add(req.body);
+      }
+      else{
+        err = 1;
+      }
     }
+
     const [listproduct, listcate] = await Promise.all([
       cartModel.all(),
       categoryModel.all()
@@ -62,7 +72,8 @@ module.exports.postAdd = async (req, res, next) => {
       listproduct,
       listcate,
       thanhtien,
-      err
+      err,
+      errValidISBN
     });
   }
   
